@@ -1,0 +1,12 @@
+*{
+  box-sizing: border-box;
+}
+
+.card {
+  padding: 0;
+  height: 500px;
+}
+.card img{
+  height: 250px;
+  object-fit: contain;
+}
