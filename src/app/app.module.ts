@@ -17,7 +17,9 @@ import { UiModule } from './ui/ui.module';
     AppRoutingModule,
     AdminModule, UiModule
   ],
-  providers: [],
+  providers: [
+    {provide: "baseUrl",useValue:"https://localhost:7131/api",multi:true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

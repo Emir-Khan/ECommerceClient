@@ -4,9 +4,16 @@
 
 .card {
   padding: 0;
-  height: 500px;
+  height: 100%;
+  margin-bottom: 3px;
+  margin-top: 6px;
 }
+
 .card img{
   height: 250px;
   object-fit: contain;
+}
+
+.container{
+  height: calc(100vh - 56px);
 }

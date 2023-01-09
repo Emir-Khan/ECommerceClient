@@ -10,10 +10,10 @@ declare var Chartist: any;
 export class DashboardComponent implements OnInit {
 
   constructor(private notificationService: NotificationService) {
-    notificationService.showNotification(NotificationType.Info,"asd","asd21",4000)
-    notificationService.showNotification(NotificationType.Error,"asd","asd21")
-    notificationService.showNotification(NotificationType.Success,"asd","asd21")
-    notificationService.showNotification(NotificationType.Warning,"asd","asd21")
+    // notificationService.showNotification(NotificationType.Info,"asd","asd21",4000)
+    // notificationService.showNotification(NotificationType.Error,"asd","asd21")
+    // notificationService.showNotification(NotificationType.Success,"asd","asd21")
+    // notificationService.showNotification(NotificationType.Warning,"asd","asd21")
   }
 
   startAnimationForLineChart(chart) {
