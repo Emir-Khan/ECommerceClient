@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import PerfectScrollbar from 'perfect-scrollbar';
+import { Product } from 'src/app/contracts/product';
+import { HttpClientService } from 'src/app/services/common/http-client.service';
 
 @Component({
   selector: 'app-products',
@@ -7,12 +9,25 @@ import PerfectScrollbar from 'perfect-scrollbar';
   styleUrls: ['./products.component.scss']
 })
 export class ProductsComponent implements OnInit {
-  ngOnInit(): void {
-const a = document.querySelector(".overflow-hiddens");
-console.log(a);
+  constructor(private httpClientService: HttpClientService) { }
 
-    const ps=  new PerfectScrollbar(a)
-    console.log("asd",ps);
+  ngOnInit(): void {
+    const a = document.querySelector("html");
+    const ps = new PerfectScrollbar(a)
+
+    this.httpClientService.get<Product[]>({ controller: "products" }).subscribe(data => console.log(data))
+  }
+
+  create(){
+    this.httpClientService.post({controller:"products"},{name:"Laptop",stock:50,price:2500}).subscribe()
+  }
+
+  update(){
+    this.httpClientService.put({controller:"products"},{id:"d59d99df-3bb4-4203-b329-a4aaf6006e6a",name:"Laptop",stock:50,price:1750}).subscribe()
+  }
+
+  remove(){
+    this.httpClientService.delete({controller:"products"},"d59d99df-3bb4-4203-b329-a4aaf6006e6a").subscribe()
   }
 
 }
