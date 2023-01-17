@@ -13,7 +13,7 @@
   height: 250px;
   object-fit: contain;
 }
-
-.container{
+.container,
+.overflow-hiddens{
   height: calc(100vh - 56px);
 }

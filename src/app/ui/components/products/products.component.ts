@@ -12,8 +12,8 @@ export class ProductsComponent implements OnInit {
   constructor(private httpClientService: HttpClientService) { }
 
   ngOnInit(): void {
-    const a = document.querySelector("html");
-    const ps = new PerfectScrollbar(a)
+    // const a = document.querySelector(".overflow-hiddens");
+    // const ps = new PerfectScrollbar(a)
 
     this.httpClientService.get<Product[]>({ controller: "products" }).subscribe(data => console.log(data))
   }

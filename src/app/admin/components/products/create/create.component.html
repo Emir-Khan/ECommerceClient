@@ -1,0 +1,19 @@
+
+<mat-form-field class="example-full-width">
+  <mat-label>Name</mat-label>
+  <input matInput placeholder="Ex. Pizza" #txtName>
+</mat-form-field>
+
+<mat-form-field class="example-full-width">
+  <mat-label>Stock</mat-label>
+  <input matInput type="number" min="0" placeholder="Ex. 100" value="0" #txtStock>
+</mat-form-field>
+
+<mat-form-field class="example-full-width">
+  <mat-label>Price</mat-label>
+  <input matInput type="number" min="0" placeholder="Ex. 10" value="0" #txtPrice>
+</mat-form-field>
+
+<button mat-raised-button class="btn btn-danger pull-right" (click)="create(txtName,txtStock,txtPrice)">Update Profile</button>
+<div class="clearfix"></div>
+

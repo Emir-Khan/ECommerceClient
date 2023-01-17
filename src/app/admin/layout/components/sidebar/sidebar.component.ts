@@ -14,6 +14,7 @@ export const ROUTES: RouteInfo[] = [
   { path: '/admin/table-list', title: 'Table List', icon: 'content_paste', class: '', exact: true },
   { path: '/admin/typography', title: 'Typography', icon: 'library_books', class: '', exact: true },
   { path: '/admin/notifications', title: 'Notifications', icon: 'notifications', class: '', exact: true },
+  { path: '/admin/products', title: 'Products', icon: 'products', class: '', exact: true },
   { path: '/admin/upgrade', title: 'Upgrade to PRO', icon: 'unarchive', class: 'active-pro', exact: true },
 ];
 

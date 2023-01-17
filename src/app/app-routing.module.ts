@@ -22,6 +22,7 @@ const routes: Routes = [
       { path: "table-list", loadChildren: () => import("./admin/components/table-list/table-list.module").then(module => module.TableListModule) },
       { path: "typography", loadChildren: () => import("./admin/components/typography/typography.module").then(module => module.TypographyModule) },
       { path: "notifications", loadChildren: () => import("./admin/components/notification/notification.module").then(module => module.NotificationModule) },
+      { path: "products", loadChildren: () => import("./admin/components/products/products.module").then(module => module.ProductsModule) },
     ]
   }
 ];
