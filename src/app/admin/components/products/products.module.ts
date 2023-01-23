@@ -4,8 +4,9 @@ import { ProductsComponent } from './products.component';
 import { RouterModule } from '@angular/router';
 import { CreateComponent } from './create/create.component';
 import { ListComponent } from './list/list.component';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatTableModule } from '@angular/material/table';
 
 
 
@@ -18,9 +19,9 @@ import { MatInputModule } from '@angular/material/input';
   imports: [
     CommonModule,
     RouterModule.forChild([
-      {path:"", component:ProductsComponent}
+      { path: "", component: ProductsComponent }
     ]),
-    MatInputModule, MatFormFieldModule
+    MatInputModule, MatFormFieldModule, MatTableModule
   ]
 })
 export class ProductsModule { }

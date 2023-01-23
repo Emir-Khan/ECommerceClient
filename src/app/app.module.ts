@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations"
 import { UiModule } from './ui/ui.module';
 import { HttpClientModule } from '@angular/common/http';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
+    NgxSpinnerModule,
     AdminModule, UiModule
   ],
   providers: [
