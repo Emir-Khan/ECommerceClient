@@ -28,8 +28,9 @@ export class ProductService {
         }
       })
   }
-  async getAll(successCallBack?: () => void, errorCalllBack?: (errorMessage) => void): Promise<ListProduct[]> {
-    const promiseData: Promise<ListProduct[]> = lastValueFrom(this.httpClientService.get<ListProduct[]>({ controller: "products" }))
+  async getAll(page: number = 0, size: number = 5, successCallBack?: () => void, errorCalllBack?: (errorMessage: string) => void): Promise<{totalCount:number,products: ListProduct[]}> {
+    const promiseData: Promise<{totalCount:number,products: ListProduct[]}> = lastValueFrom(this.httpClientService
+      .get<{totalCount:number,products: ListProduct[]}>({ controller: "products", queryString: `page=${page}&size=${size}` }))
 
     promiseData.then(d => successCallBack()).catch((errorResult: HttpErrorResponse) => errorCalllBack(errorResult.message))
 

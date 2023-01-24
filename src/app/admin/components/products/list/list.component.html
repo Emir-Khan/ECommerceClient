@@ -1,11 +1,38 @@
 <div class="card mt-0">
   <div class="card-content table-responsive table-full-width">
-    <table class="table">
-      <thead class="text-danger">
-        <th>Name</th>
-        <th>Country</th>
-        <th>City</th>
-        <th>Salary</th>
+    <table mat-table [dataSource]="dataSource" class="table">
+      <ng-container matColumnDef="name">
+        <th class="text-danger" mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="stock">
+        <th class="text-danger" mat-header-cell *matHeaderCellDef>Stock</th>
+        <td mat-cell *matCellDef="let element">{{ element.stock }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="price">
+        <th class="text-danger" mat-header-cell *matHeaderCellDef>Price</th>
+        <td mat-cell *matCellDef="let element">{{ element.price }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="createdDate">
+        <th class="text-danger" mat-header-cell *matHeaderCellDef>Created Date</th>
+        <td mat-cell *matCellDef="let element">{{ element.createdDate | date}}</td>
+      </ng-container>
+
+      <!-- <ng-container matColumnDef="updatedDate">
+        <th class="text-danger" mat-header-cell *matHeaderCellDef>Updated Date</th>
+        <td mat-cell *matCellDef="let element">{{ element.updatedDate }}</td>
+      </ng-container> -->
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      <!-- <thead class="text-danger">
+        <th class="text-danger">Name</th>
+        <th class="text-danger">Country</th>
+        <th class="text-danger">City</th>
+        <th class="text-danger">Salary</th>
       </thead>
       <tbody>
         <tr>
@@ -44,7 +71,14 @@
           <td>Gloucester</td>
           <td class="text-danger">$78,615</td>
         </tr>
-      </tbody>
+      </tbody> -->
     </table>
+    <mat-paginator
+      (page)="pageChanged()"
+      [pageSizeOptions]="[5, 10, 20]"
+      showFirstLastButtons
+      aria-label="Select page of periodic elements"
+    >
+    </mat-paginator>
   </div>
 </div>
