@@ -8,7 +8,7 @@ export class BaseComponent {
     this.spinner.show(spinnerTypeName)
     setTimeout(() => {
       this.hideSpinner(spinnerTypeName);
-    }, 2000);
+    }, 10000);
   }
 
   hideSpinner(spinnerTypeName: SpinnerType = SpinnerType.RunningDots) {

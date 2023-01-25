@@ -6,6 +6,7 @@ import { BaseComponent } from 'src/app/base/base.component';
 import { ListProduct } from 'src/app/contracts/list-product';
 import { NotificationService, NotificationType } from 'src/app/services/admin/notification.service';
 import { ProductService } from 'src/app/services/common/models/product.service';
+declare var $:any;
 
 @Component({
   selector: 'app-list',
@@ -13,7 +14,7 @@ import { ProductService } from 'src/app/services/common/models/product.service';
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent extends BaseComponent implements OnInit {
-  displayedColumns: string[] = ["name", "stock", "price", "createdDate"]
+  displayedColumns: string[] = ["name", "stock", "price", "createdDate","edit","delete"]
   dataSource: MatTableDataSource<ListProduct> = new MatTableDataSource<ListProduct>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 

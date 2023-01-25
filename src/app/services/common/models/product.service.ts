@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { lastValueFrom } from 'rxjs';
+import { lastValueFrom, Observable, firstValueFrom } from 'rxjs';
 import { CreateProduct } from 'src/app/contracts/create-product';
 import { ListProduct } from 'src/app/contracts/list-product';
 import { HttpClientService } from '../http-client.service';
@@ -28,9 +28,14 @@ export class ProductService {
         }
       })
   }
-  async getAll(page: number = 0, size: number = 5, successCallBack?: () => void, errorCalllBack?: (errorMessage: string) => void): Promise<{totalCount:number,products: ListProduct[]}> {
-    const promiseData: Promise<{totalCount:number,products: ListProduct[]}> = lastValueFrom(this.httpClientService
-      .get<{totalCount:number,products: ListProduct[]}>({ controller: "products", queryString: `page=${page}&size=${size}` }))
+  async delete(id: string) {
+    const deleteObs: Observable<any> = this.httpClientService.delete({ controller: "products" }, id);
+    await firstValueFrom(deleteObs)
+  }
+  async getAll(page: number = 0, size: number = 5, successCallBack?: () => void, errorCalllBack?: (errorMessage: string) => void): Promise<{ totalCount: number, products: ListProduct[] }> {
+    const readObservable: Observable<{ totalCount: number, products: ListProduct[] }> = this.httpClientService
+      .get<{ totalCount: number, products: ListProduct[] }>({ controller: "products", queryString: `page=${page}&size=${size}` })
+    const promiseData: Promise<{ totalCount: number, products: ListProduct[] }> = lastValueFrom(readObservable)
 
     promiseData.then(d => successCallBack()).catch((errorResult: HttpErrorResponse) => errorCalllBack(errorResult.message))
 
