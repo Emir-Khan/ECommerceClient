@@ -12,6 +12,7 @@ import { DeleteDirective } from 'src/app/directives/admin/delete.directive';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DeleteDialogComponent } from '../../../dialogs/delete-dialog/delete-dialog.component';
 import { MatButtonModule } from '@angular/material/button';
+import { FileUploadModule } from 'src/app/services/common/file-upload/file-upload.module';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import { MatButtonModule } from '@angular/material/button';
     RouterModule.forChild([
       { path: "", component: ProductsComponent }
     ]),
+    FileUploadModule,
     MatInputModule, MatFormFieldModule, MatTableModule, MatPaginatorModule, MatDialogModule, MatButtonModule
   ]
 })

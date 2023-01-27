@@ -3,6 +3,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { BaseComponent } from 'src/app/base/base.component';
 import { CreateProduct } from 'src/app/contracts/create-product';
 import { NotificationService, NotificationType } from 'src/app/services/admin/notification.service';
+import { FileUploadOptions } from 'src/app/services/common/file-upload/file-upload.component';
 import { ProductService } from 'src/app/services/common/models/product.service';
 
 @Component({
@@ -11,15 +12,22 @@ import { ProductService } from 'src/app/services/common/models/product.service';
   styleUrls: ['./create.component.scss']
 })
 export class CreateComponent extends BaseComponent implements OnInit {
+  @Output() fileUploadOptions: Partial<FileUploadOptions>={
+    controller:"products",
+    action:"upload",
+    explanation:"Choose or Drag Files",
+    accept:".png, .jpg, .jpeg",
+    isAdminPage:true,
+  }
 
-  constructor(private productService: ProductService, private notificationService: NotificationService, myspinner:NgxSpinnerService) {
+  constructor(private productService: ProductService, private notificationService: NotificationService, myspinner: NgxSpinnerService) {
     super(myspinner);
   }
 
   ngOnInit(): void {
 
   }
-  
+
   @Output() createdProduct: EventEmitter<CreateProduct> = new EventEmitter();
 
   create(name: HTMLInputElement, stock: HTMLInputElement, price: HTMLInputElement) {

@@ -33,6 +33,7 @@
               "node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "node_modules/perfect-scrollbar/css/perfect-scrollbar.css",
               "node_modules/ngx-spinner/animations/ball-running-dots.css",
+              "node_modules/ngx-toastr/toastr.css",
               "src/styles.scss"
             ],
             "scripts": [

@@ -1,8 +1,11 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Directive, ElementRef, EventEmitter, HostListener, Input, Output, Renderer2 } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { SpinnerType } from 'src/app/base/base.component';
 import { DeleteDialogComponent } from 'src/app/dialogs/delete-dialog/delete-dialog.component';
+import { NotificationService, NotificationType } from 'src/app/services/admin/notification.service';
+import { HttpClientService } from 'src/app/services/common/http-client.service';
 import { ProductService } from 'src/app/services/common/models/product.service';
 declare var $: any;
 
@@ -14,7 +17,8 @@ export class DeleteDirective {
   constructor(
     private element: ElementRef,
     private _renderer: Renderer2,
-    private productService: ProductService,
+    private httpClientService: HttpClientService,
+    private notificationService: NotificationService,
     private spinner: NgxSpinnerService,
     public dialog: MatDialog
   ) {
@@ -26,6 +30,7 @@ export class DeleteDirective {
   }
 
   @Input() id: string;
+  @Input() controller: string;
   @Output() callback: EventEmitter<any> = new EventEmitter()
 
   @HostListener("click")
@@ -33,9 +38,21 @@ export class DeleteDirective {
     this.openDialog(async () => {
       this.spinner.show(SpinnerType.RunningDots)
       const td: HTMLTableCellElement = this.element.nativeElement
-      await this.productService.delete(this.id);
-
-      $(td.parentElement).fadeOut(1500, () => this.callback.emit())
+      this.httpClientService.delete({ controller: this.controller }, this.id).subscribe({
+        next: result =>
+          $(td.parentElement).animate({
+            opacity: 0,
+            left: "+=75",
+            height: "toogle"
+          }, 1000, () => {
+            this.callback.emit();
+            this.notificationService.showNotification(NotificationType.Info, "Info", "Delete Success");
+          }),
+        error: (errorResponse: HttpErrorResponse) => {
+          this.notificationService.showNotification(NotificationType.Error, "Error", "Unknown Error");
+          this.spinner.hide(SpinnerType.RunningDots);
+        }
+      });
     })
   }
 
@@ -45,7 +62,7 @@ export class DeleteDirective {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result ==DeleteState.Yes) {
+      if (result == DeleteState.Yes) {
         afterClosed();
       }
     });
