@@ -21,9 +21,14 @@
         <td mat-cell *matCellDef="let element">{{ element.createdDate | date}}</td>
       </ng-container>
 
+      <ng-container matColumnDef="photos">
+        <th class="text-danger" mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let element"><i style="color: #0782d0;" (click)="addProductImages(element.id)" class="material-icons cursor-pointer">image</i></td>
+      </ng-container>
+
       <ng-container matColumnDef="edit">
         <th class="text-danger" mat-header-cell *matHeaderCellDef></th>
-        <td mat-cell *matCellDef="let element"><i class="material-icons">edit</i></td>
+        <td mat-cell *matCellDef="let element"><i class="material-icons cursor-pointer">edit</i></td>
       </ng-container>
 
       <ng-container matColumnDef="delete">

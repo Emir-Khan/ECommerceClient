@@ -5,6 +5,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { SpinnerType } from 'src/app/base/base.component';
 import { DeleteDialogComponent } from 'src/app/dialogs/delete-dialog/delete-dialog.component';
 import { NotificationService, NotificationType } from 'src/app/services/admin/notification.service';
+import { DialogService } from 'src/app/services/common/dialog.service';
 import { HttpClientService } from 'src/app/services/common/http-client.service';
 import { ProductService } from 'src/app/services/common/models/product.service';
 declare var $: any;
@@ -20,11 +21,11 @@ export class DeleteDirective {
     private httpClientService: HttpClientService,
     private notificationService: NotificationService,
     private spinner: NgxSpinnerService,
-    public dialog: MatDialog
+    private dialog: MatDialog,
+    private dialogService: DialogService
   ) {
     const i: HTMLElement = _renderer.createElement("i")
-    i.className = "material-icons text-danger"
-    i.style.cursor = "pointer"
+    i.className = "material-icons text-danger cursor-pointer"
     i.textContent = "delete"
     _renderer.appendChild(element.nativeElement, i)
   }
@@ -35,25 +36,31 @@ export class DeleteDirective {
 
   @HostListener("click")
   async onclick() {
-    this.openDialog(async () => {
-      this.spinner.show(SpinnerType.RunningDots)
-      const td: HTMLTableCellElement = this.element.nativeElement
-      this.httpClientService.delete({ controller: this.controller }, this.id).subscribe({
-        next: result =>
-          $(td.parentElement).animate({
-            opacity: 0,
-            left: "+=75",
-            height: "toogle"
-          }, 1000, () => {
-            this.callback.emit();
-            this.notificationService.showNotification(NotificationType.Info, "Info", "Delete Success");
-          }),
-        error: (errorResponse: HttpErrorResponse) => {
-          this.notificationService.showNotification(NotificationType.Error, "Error", "Unknown Error");
-          this.spinner.hide(SpinnerType.RunningDots);
+    this.dialogService.openDialog(
+      {
+        componentType: DeleteDialogComponent,
+        data: DeleteState.Yes,
+        afterClosed: async () => {
+          this.spinner.show(SpinnerType.RunningDots)
+          const td: HTMLTableCellElement = this.element.nativeElement
+          this.httpClientService.delete({ controller: this.controller }, this.id).subscribe({
+            next: result =>
+              $(td.parentElement).animate({
+                opacity: 0,
+                left: "+=75",
+                height: "toogle"
+              }, 1000, () => {
+                this.callback.emit();
+                this.notificationService.showNotification(NotificationType.Info, "Info", "Delete Success");
+              }),
+            error: (errorResponse: HttpErrorResponse) => {
+              this.notificationService.showNotification(NotificationType.Error, "Error", "Unknown Error");
+              this.spinner.hide(SpinnerType.RunningDots);
+            }
+          });
         }
-      });
-    })
+      }
+    )
   }
 
   openDialog(afterClosed: () => void): void {

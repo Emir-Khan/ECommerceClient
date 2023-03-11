@@ -11,21 +11,9 @@ import { ProductService } from 'src/app/services/common/models/product.service';
   templateUrl: './create.component.html',
   styleUrls: ['./create.component.scss']
 })
-export class CreateComponent extends BaseComponent implements OnInit {
-  @Output() fileUploadOptions: Partial<FileUploadOptions>={
-    controller:"products",
-    action:"upload",
-    explanation:"Choose or Drag Files",
-    accept:".png, .jpg, .jpeg",
-    isAdminPage:true,
-  }
-
+export class CreateComponent extends BaseComponent {
   constructor(private productService: ProductService, private notificationService: NotificationService, myspinner: NgxSpinnerService) {
     super(myspinner);
-  }
-
-  ngOnInit(): void {
-
   }
 
   @Output() createdProduct: EventEmitter<CreateProduct> = new EventEmitter();
