@@ -1,0 +1,26 @@
+.product-image-card {
+  position: relative;
+  max-width: 200px;
+  float: left;
+  margin: 5px;
+}
+
+.product-image {
+  width: 200px;
+  height: 200px;
+  background-size: cover;
+  object-fit: cover;
+}
+
+.image-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+.product-image-card:hover .image-button {
+  opacity: 1;
+}

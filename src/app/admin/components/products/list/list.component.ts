@@ -34,7 +34,7 @@ export class ListComponent extends BaseComponent implements OnInit {
   }
 
   addProductImages(id: string) {
-    this.dialogService.openDialog({ componentType: SelectProductImageDialogComponent, data: id })
+    this.dialogService.openDialog({ componentType: SelectProductImageDialogComponent, data: id,options:{width:"1120px"} })
   }
 
   async getProducts() {
