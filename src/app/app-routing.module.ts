@@ -3,18 +3,19 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './admin/components/dashboard/dashboard.component';
 import { LayoutComponent } from './admin/layout/layout.component';
 import { ProductsComponent } from './ui/components/products/products.component';
-import { HeaderComponent } from './ui/layout/components/header/header.component';
+import { RegisterComponent } from './ui/components/register/register.component';
 import { LayoutComponent as UIComponent } from './ui/layout/layout.component';
 
 const routes: Routes = [
   {
     path: '',
-    component:UIComponent,
-    children:[
-      {path:"",component:ProductsComponent},
-      {path:"orders",loadChildren: () => import("./ui/components/orders/orders.module").then(module=> module.OrdersModule)}
+    component: UIComponent,
+    children: [
+      { path: "", component: ProductsComponent },
+      { path: "orders", loadChildren: () => import("./ui/components/orders/orders.module").then(module => module.OrdersModule) },
     ]
   },
+  { path: "register", component: RegisterComponent },
   {
     path: "admin", component: LayoutComponent, children: [
       { path: "", component: DashboardComponent },
