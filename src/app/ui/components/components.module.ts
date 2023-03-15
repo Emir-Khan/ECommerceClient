@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ProductsModule } from './products/products.module';
 import { OrdersModule } from './orders/orders.module';
 import { RegisterModule } from './register/register.module';
+import { LoginModule } from './login/login.module';
 
 
 
@@ -10,6 +11,7 @@ import { RegisterModule } from './register/register.module';
   declarations: [],
   imports: [
     CommonModule,
+    LoginModule,
     RegisterModule,
     ProductsModule,
     OrdersModule

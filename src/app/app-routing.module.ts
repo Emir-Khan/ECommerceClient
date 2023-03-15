@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './admin/components/dashboard/dashboard.component';
 import { LayoutComponent } from './admin/layout/layout.component';
+import { AuthGuard } from './guards/common/auth.guard';
+import { LoginComponent } from './ui/components/login/login.component';
 import { ProductsComponent } from './ui/components/products/products.component';
 import { RegisterComponent } from './ui/components/register/register.component';
 import { LayoutComponent as UIComponent } from './ui/layout/layout.component';
@@ -16,6 +18,7 @@ const routes: Routes = [
     ]
   },
   { path: "register", component: RegisterComponent },
+  { path: "login", component: LoginComponent },
   {
     path: "admin", component: LayoutComponent, children: [
       { path: "", component: DashboardComponent },
@@ -24,7 +27,7 @@ const routes: Routes = [
       { path: "typography", loadChildren: () => import("./admin/components/typography/typography.module").then(module => module.TypographyModule) },
       { path: "notifications", loadChildren: () => import("./admin/components/notification/notification.module").then(module => module.NotificationModule) },
       { path: "products", loadChildren: () => import("./admin/components/products/products.module").then(module => module.ProductsModule) },
-    ]
+    ], canActivate: [AuthGuard], canActivateChild: [AuthGuard]
   }
 ];
 
