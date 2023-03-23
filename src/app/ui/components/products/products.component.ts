@@ -15,7 +15,7 @@ export class ProductsComponent implements OnInit {
     // const a = document.querySelector(".overflow-hiddens");
     // const ps = new PerfectScrollbar(a)
 
-    this.httpClientService.get<Product[]>({ controller: "products" }).subscribe(data => console.log(data))
+    // this.httpClientService.get<Product[]>({ controller: "products" }).subscribe(data => console.log(data))
   }
 
   create(){

@@ -1,13 +1,13 @@
 <div class="text-center">
   <main class="form-signin w-100 m-auto">
     <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
-      <img
+      <!-- <img
         class="mb-4"
         src="/docs/5.3/assets/brand/bootstrap-logo.svg"
         alt=""
         width="72"
         height="57"
-      />
+      /> -->
       <h1 class="h3 mb-3 fw-normal">Log In</h1>
      
       <!-- <div class="form-floating">
@@ -43,12 +43,15 @@
         />
         <label for="floatingPassword">Password</label>
       </div>
-      
-      <div class="checkbox mb-3">
+      <div class="d-flex justify-content-center mb-2 align-items-center">
+        <asl-google-signin-button></asl-google-signin-button>
+        <div class="ms-1 facebook" (click)="facebookLogin()"> <img src="assets\svg\facebook.svg" style="padding: 6px;" width="30px" height="30px"/></div>
+      </div>
+      <!-- <div class="checkbox mb-3">
         <label>
           <input type="checkbox" value="remember-me" /> Remember me
         </label>
-      </div>
+      </div> -->
       <button class="w-100 btn btn-lg btn-primary" type="submit">
         Log In
       </button>
