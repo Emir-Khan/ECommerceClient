@@ -6,13 +6,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations"
 import { UiModule } from './ui/ui.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ToastrModule } from 'ngx-toastr';
 import { JwtModule } from '@auth0/angular-jwt';
 import { LoginComponent } from './ui/components/login/login.component';
 import { FacebookLoginProvider, GoogleLoginProvider, GoogleSigninButtonModule, SocialAuthServiceConfig, SocialLoginModule } from '@abacritt/angularx-social-login';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpErrorHandlerInterceptorService } from './services/common/http-error-handler-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { ReactiveFormsModule } from '@angular/forms';
         onError: err => console.log(err)
       } as SocialAuthServiceConfig
     },
-    { provide: "baseUrl", useValue: "https://localhost:7131/api", multi: true }
+    { provide: "baseUrl", useValue: "https://localhost:7131/api", multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: HttpErrorHandlerInterceptorService, multi: true }
   ],
   bootstrap: [AppComponent],
   schemas: [

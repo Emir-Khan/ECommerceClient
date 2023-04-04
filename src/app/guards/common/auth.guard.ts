@@ -4,7 +4,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Observable } from 'rxjs';
 import { SpinnerType } from 'src/app/base/base.component';
-import { _isAuthenticated } from 'src/app/services/common/auth.service';
+import { AuthService, _isAuthenticated } from 'src/app/services/common/auth.service';
 import { CustomToastrService, ToastrMessageType, ToastrPosition } from 'src/app/services/ui/custom-toastr.service';
 
 @Injectable({
@@ -15,11 +15,11 @@ export class AuthGuard implements CanActivate, CanActivateChild {
     private router: Router,
     private toastrService: CustomToastrService,
     private spinner: NgxSpinnerService,
+    private authService:AuthService
   ) { }
   check(state: RouterStateSnapshot) {
     this.spinner.show(SpinnerType.RunningDots)
-
-
+    this.authService.identityCheck()
     if (!_isAuthenticated) {
       this.router.navigate(["login"], { queryParams: { returnUrl: state.url } })
       this.toastrService.message("Please login", "Info", {

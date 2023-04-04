@@ -12,7 +12,6 @@ export class AuthService {
 
   identityCheck() {
     const token: string = localStorage.getItem("accessToken");
-
     // const decodeToken = this.jwtHelperService.decodeToken(token)
     // const expirationDate = this.jwtHelperService.getTokenExpirationDate(token)
     let expired: boolean

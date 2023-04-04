@@ -10,7 +10,7 @@ import { CustomToastrService, ToastrMessageType, ToastrPosition } from 'src/app/
 })
 export class LayoutComponent {
   constructor(public authService: AuthService, private toastrService: CustomToastrService, private router: Router) {
-    authService.identityCheck()
+    // authService.identityCheck()
   }
 
   

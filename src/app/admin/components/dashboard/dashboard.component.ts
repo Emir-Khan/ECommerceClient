@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { HubUrls } from 'src/app/constants/hub-urls';
+import { ReceiveFunctions } from 'src/app/constants/recieve-functions';
 import { NotificationService, NotificationType } from 'src/app/services/admin/notification.service';
+import { SignalRService } from 'src/app/services/common/signalr.service';
 declare var Chartist: any;
 
 @Component({
@@ -9,11 +12,8 @@ declare var Chartist: any;
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(private notificationService: NotificationService) {
-    // notificationService.showNotification(NotificationType.Info,"asd","asd21",4000)
-    // notificationService.showNotification(NotificationType.Error,"asd","asd21")
-    // notificationService.showNotification(NotificationType.Success,"asd","asd21")
-    // notificationService.showNotification(NotificationType.Warning,"asd","asd21")
+  constructor(private notificationService: NotificationService, private signalRService: SignalRService) {
+    signalRService.start(HubUrls.ProductHub)
   }
 
   startAnimationForLineChart(chart) {
@@ -73,6 +73,10 @@ export class DashboardComponent implements OnInit {
     seq2 = 0;
   };
   ngOnInit() {
+    this.signalRService.on(ReceiveFunctions.ProductAddedMessageReceiveFunction, message => {
+      this.notificationService.showNotification(NotificationType.Info, "Info", message)
+    });
+
     /* ----------==========     Daily Sales Chart initialization For Documentation    ==========---------- */
 
     const dataDailySalesChart: any = {

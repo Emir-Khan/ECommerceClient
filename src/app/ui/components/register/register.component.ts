@@ -44,12 +44,12 @@ export class RegisterComponent implements OnInit {
 
     const result: CreateUser = await this.userService.create(user);
     if (result.succeeded)
-      this.toastrService.message(result.message, "Kullanıcı Kaydı Başarılı", {
+      this.toastrService.message(result.message, "Registration Success", {
         messageType: ToastrMessageType.Success,
         position: ToastrPosition.TopRight
       })
     else
-      this.toastrService.message(result.message, "Hata", {
+      this.toastrService.message(result.message, "Error", {
         messageType: ToastrMessageType.Error,
         position: ToastrPosition.TopRight
       })

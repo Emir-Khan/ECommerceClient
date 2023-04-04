@@ -30,6 +30,7 @@ export class LoginComponent implements OnInit {
       spinner.show(SpinnerType.RunningDots)
       switch (user.provider) {
         case "GOOGLE":
+          // i can add navigateToReturnUrlOrMain method to authService
           await userAuthService.googleLogin(user, () => { authService.identityCheck(); this.navigateToReturnUrlOrMain(); spinner.hide(SpinnerType.RunningDots) })
           break;
         case "FACEBOOK":
