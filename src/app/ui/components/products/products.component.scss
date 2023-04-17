@@ -1,18 +1,6 @@
 *{
   box-sizing: border-box;
 }
-
-.card {
-  padding: 0;
-  height: 100%;
-  margin-bottom: 3px;
-  margin-top: 6px;
-}
-
-.card img{
-  height: 250px;
-  object-fit: contain;
-}
 .container,
 .overflow-hiddens{
   height: calc(100vh - 56px);

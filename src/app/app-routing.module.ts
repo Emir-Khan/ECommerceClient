@@ -13,7 +13,8 @@ const routes: Routes = [
     path: '',
     component: UIComponent,
     children: [
-      { path: "", component: ProductsComponent },
+      { path: "products", component: ProductsComponent },
+      { path: "products/:pageNo", component: ProductsComponent },
       { path: "orders", loadChildren: () => import("./ui/components/orders/orders.module").then(module => module.OrdersModule) },
     ]
   },

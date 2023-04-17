@@ -24,3 +24,10 @@
 .product-image-card:hover .image-button {
   opacity: 1;
 }
+
+.form-check-radio{
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 50;
+}

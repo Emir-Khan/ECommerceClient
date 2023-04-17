@@ -22,7 +22,7 @@ export class SelectProductImageDialogComponent extends BaseDialog<SelectProductI
     dialogRef: MatDialogRef<SelectProductImageDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: SelectProductImageState | string,
     private spinner: NgxSpinnerService,
-    private dialogService:DialogService,
+    private dialogService: DialogService,
     private productService: ProductService
   ) {
     super(dialogRef);
@@ -32,6 +32,8 @@ export class SelectProductImageDialogComponent extends BaseDialog<SelectProductI
   async ngOnInit() {
     this.spinner.show(SpinnerType.RunningDots)
     this.images = await this.productService.readImages(this.data as string, () => this.spinner.hide(SpinnerType.RunningDots))
+    console.log(this.images);
+    
   }
 
   @Output() options: Partial<FileUploadOptions> = {
@@ -56,6 +58,13 @@ export class SelectProductImageDialogComponent extends BaseDialog<SelectProductI
           card.fadeOut(500);
         });
       }
+    })
+  }
+
+  changeShowCase(imageId: string) {
+    this.spinner.show(SpinnerType.RunningDots)
+    this.productService.changeShowCaseImage(imageId, this.data as string, () => {
+      this.spinner.hide(SpinnerType.RunningDots)
     })
   }
 }

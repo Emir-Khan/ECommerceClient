@@ -1,3 +1,16 @@
 ::ng-deep {
   @import "../../../../node_modules/bootstrap/scss/bootstrap.scss";
 }
+
+.basket-icon {
+  text-decoration: none;
+  cursor: pointer;
+  
+}
+i{
+  transition: all 500ms;
+}
+
+.basket-icon:hover i {
+  color: var(--bs-warning) !important;
+}

@@ -3,6 +3,14 @@
   <app-file-upload [options]="options"></app-file-upload>
 
   <mat-card class="product-image-card" *ngFor="let image of images">
+    <div class="form-check form-check-radio">
+      <label class="form-check-label">
+          <input class="form-check-input" type="radio" name="exampleRadios" (click)="changeShowCase(image.id)" [checked]="image.showCase">
+          <span class="circle">
+              <span class="check"></span>
+          </span>
+      </label>
+    </div>
     <img mat-card-image [src]="image.path" class="product-image" alt="Photo of a Shiba Inu">
     <button mat-mini-fab color="warn" class="image-button" aria-label="Example icon button with a delete icon" (click)="deleteImage(image.id,$event)">
       <mat-icon>delete</mat-icon>

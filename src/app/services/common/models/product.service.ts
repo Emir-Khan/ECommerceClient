@@ -33,10 +33,10 @@ export class ProductService {
     const deleteObs: Observable<any> = this.httpClientService.delete({ controller: "products" }, id);
     await firstValueFrom(deleteObs)
   }
-  async getAll(page: number = 0, size: number = 5, successCallBack?: () => void, errorCalllBack?: (errorMessage: string) => void): Promise<{ totalCount: number, products: ListProduct[] }> {
-    const readObservable: Observable<{ totalCount: number, products: ListProduct[] }> = this.httpClientService
-      .get<{ totalCount: number, products: ListProduct[] }>({ controller: "products", queryString: `page=${page}&size=${size}` })
-    const promiseData: Promise<{ totalCount: number, products: ListProduct[] }> = lastValueFrom(readObservable)
+  async getAll(page: number = 0, size: number = 5, successCallBack?: () => void, errorCalllBack?: (errorMessage: string) => void): Promise<{ totalProductCount: number, products: ListProduct[] }> {
+    const readObservable: Observable<{ totalProductCount: number, products: ListProduct[] }> = this.httpClientService
+      .get<{ totalProductCount: number, products: ListProduct[] }>({ controller: "products", queryString: `page=${page}&size=${size}` })
+    const promiseData: Promise<{ totalProductCount: number, products: ListProduct[] }> = lastValueFrom(readObservable)
 
     promiseData.then(d => successCallBack()).catch((errorResult: HttpErrorResponse) => errorCalllBack(errorResult.message))
 
@@ -57,6 +57,16 @@ export class ProductService {
       queryString: `imageId=${imageId}`
     }, id)
     await firstValueFrom(deleteObservable);
+    successCallBack();
+  }
+  async changeShowCaseImage(imageId: string, productId: string, successCallBack?: () => void) {
+    const observable = this.httpClientService.get({
+      controller: "products",
+      action: "ChangeShowcaseImage",
+      queryString: `imageId=${imageId}&productId=${productId}`
+    })
+    await firstValueFrom(observable);
+
     successCallBack();
   }
 }

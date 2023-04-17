@@ -5,13 +5,15 @@ import { catchError, Observable, of } from 'rxjs';
 import { SpinnerType } from 'src/app/base/base.component';
 import { CustomToastrService, ToastrMessageType, ToastrPosition } from '../ui/custom-toastr.service';
 import { UserAuthService } from './models/user-auth.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpErrorHandlerInterceptorService implements HttpInterceptor {
 
-  constructor(private toastrService: CustomToastrService, private userAuthService: UserAuthService, private spinner: NgxSpinnerService) { }
+  constructor(private toastrService: CustomToastrService, private userAuthService: UserAuthService,
+    private spinner: NgxSpinnerService, private router: Router) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(req).pipe(catchError(error => {
@@ -25,6 +27,14 @@ export class HttpErrorHandlerInterceptorService implements HttpInterceptor {
                   position: ToastrPosition.TopRight
                 });
               }
+            }).catch(() => {
+              const url = this.router.url;
+              if (url == "/products")
+                this.toastrService.message("You need to be logged in to add products to the cart.", "Please Login", {
+                  messageType: ToastrMessageType.Warning,
+                  position: ToastrPosition.TopRight
+                });
+              this.spinner.hide(SpinnerType.RunningDots)
             })
             // need update
           } catch (error) {

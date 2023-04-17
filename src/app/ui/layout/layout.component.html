@@ -1,13 +1,17 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container">
     <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" routerLink="products" routerLinkActive="active">Products</a>
         </li>
         <li class="nav-item" *ngIf="authService.isAuthenticated">
           <a class="nav-link" routerLink="/admin">Admin Pannel</a>
@@ -19,7 +23,9 @@
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="#">Action</a></li>
             <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><hr class="dropdown-divider"></li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
             <li><a class="dropdown-item" href="#">Something else here</a></li>
           </ul>
         </li>
@@ -27,12 +33,27 @@
           <a class="nav-link disabled">Disabled</a>
         </li>
       </ul>
-      <div class="d-flex" role="search">
-        <button class="btn btn-outline-success me-1" *ngIf="!authService.isAuthenticated" routerLink="login">Log In</button>
-        <button class="btn btn-outline-primary" *ngIf="!authService.isAuthenticated" routerLink="register">Sign Up</button>
-        <button class="btn btn-outline-danger" (click)="authService.logOut()" *ngIf="authService.isAuthenticated">Log Out</button>
+      <div class="d-flex align-items-center" role="search">
+        <div data-bs-toggle="modal" data-bs-target="#basketModal">
+          <a class="basket-icon text-dark">
+            <i class="fa-solid fa-cart-shopping" (click)="loadComponent()"></i>
+            Sepetim
+          </a>
+        </div>
+        <button class="btn btn-outline-success me-1" *ngIf="!authService.isAuthenticated" routerLink="login">Log
+          In</button>
+        <button class="btn btn-outline-primary" *ngIf="!authService.isAuthenticated" routerLink="register">Sign
+          Up</button>
+        <button class="btn btn-outline-danger" (click)="authService.logOut()" *ngIf="authService.isAuthenticated">Log
+          Out</button>
       </div>
     </div>
   </div>
 </nav>
+<!-- <app-basket></app-basket> -->
+<div class="modal fade" id="basketModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <ng-template appDynamicComponentLoader></ng-template>
+  </div>
+</div>
 <router-outlet></router-outlet>

@@ -1,0 +1,34 @@
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Your Basket</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <table class="table table-light table-striped">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Name</th>
+              <th scope="col">Price</th>
+              <th scope="col">Quantity</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="{{basketItem.basketItemId}}" class="align-baseline" *ngFor="let basketItem of basketItems;let i = index">
+              <th scope="row">{{i+1}}</th>
+              <td>{{basketItem.name}}</td>
+              <td>{{basketItem.price}}</td>
+              <td><input class="form-control quantity" type="number" value="{{basketItem.quantity}}"
+                  (change)="changeQuantity($event,basketItem.basketItemId)"></td>
+              <td><button type="button" class="btn-close" (click)="removeBasketItem(basketItem.basketItemId)"></button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-success">Go To Checkout</button>
+      </div>
+    </div>

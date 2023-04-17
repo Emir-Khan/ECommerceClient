@@ -18,16 +18,16 @@ export class ProductsComponent implements OnInit {
     // this.httpClientService.get<Product[]>({ controller: "products" }).subscribe(data => console.log(data))
   }
 
-  create(){
-    this.httpClientService.post({controller:"products"},{name:"Laptop",stock:50,price:2500}).subscribe()
-  }
+  // create(){
+  //   this.httpClientService.post({controller:"products"},{name:"Laptop",stock:50,price:2500}).subscribe()
+  // }
 
-  update(){
-    this.httpClientService.put({controller:"products"},{id:"d59d99df-3bb4-4203-b329-a4aaf6006e6a",name:"Laptop",stock:50,price:1750}).subscribe()
-  }
+  // update(){
+  //   this.httpClientService.put({controller:"products"},{id:"d59d99df-3bb4-4203-b329-a4aaf6006e6a",name:"Laptop",stock:50,price:1750}).subscribe()
+  // }
 
-  remove(){
-    this.httpClientService.delete({controller:"products"},"d59d99df-3bb4-4203-b329-a4aaf6006e6a").subscribe()
-  }
+  // remove(){
+  //   this.httpClientService.delete({controller:"products"},"d59d99df-3bb4-4203-b329-a4aaf6006e6a").subscribe()
+  // }
 
 }

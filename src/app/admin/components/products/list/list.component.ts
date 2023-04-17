@@ -41,7 +41,7 @@ export class ListComponent extends BaseComponent implements OnInit {
     this.showSpinner();
     const products = await this.productService.getAll(this.paginator ? this.paginator.pageIndex : 0, this.paginator ? this.paginator.pageSize : 5, () => this.hideSpinner(), errorMessage => this.notificationService.showNotification(NotificationType.Error, "Error", errorMessage))
     this.dataSource = new MatTableDataSource<ListProduct>(products.products)
-    this.paginator.length = products.totalCount;
+    this.paginator.length = products.totalProductCount;
   }
 
   async pageChanged() {

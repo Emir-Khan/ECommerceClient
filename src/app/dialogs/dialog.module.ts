@@ -7,6 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { SelectProductImageDialogComponent } from './select-product-image-dialog/select-product-image-dialog.component';
 import { FileUploadModule } from '../services/common/file-upload/file-upload.module';
 import {MatIconModule} from '@angular/material/icon';
+import { MatRadioModule } from '@angular/material/radio';
 
 
 @NgModule({
@@ -16,7 +17,7 @@ import {MatIconModule} from '@angular/material/icon';
   ],
   imports: [
     CommonModule,
-    MatDialogModule, MatButtonModule, MatCardModule,MatIconModule,
+    MatDialogModule, MatButtonModule, MatCardModule,MatIconModule,MatRadioModule,
     FileUploadModule
   ]
 })
