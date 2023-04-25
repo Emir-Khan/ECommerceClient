@@ -6,6 +6,7 @@ import { NotificationModule } from './notification/notification.module';
 import { TableListModule } from './table-list/table-list.module';
 import { TypographyModule } from './typography/typography.module';
 import { ProductsModule } from './products/products.module';
+import { OrdersModule } from './orders/orders.module';
 
 
 
@@ -18,7 +19,8 @@ import { ProductsModule } from './products/products.module';
     NotificationModule,
     TableListModule,
     TypographyModule,
-    ProductsModule
+    ProductsModule,
+    OrdersModule
   ]
 })
 export class ComponentsModule { }

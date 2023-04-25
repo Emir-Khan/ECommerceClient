@@ -15,7 +15,7 @@ const routes: Routes = [
     children: [
       { path: "products", component: ProductsComponent },
       { path: "products/:pageNo", component: ProductsComponent },
-      { path: "orders", loadChildren: () => import("./ui/components/orders/orders.module").then(module => module.OrdersModule) },
+      // { path: "orders", loadChildren: () => import("./ui/components/orders/orders.module").then(module => module.OrdersModule) },
     ]
   },
   { path: "register", component: RegisterComponent },
@@ -28,6 +28,7 @@ const routes: Routes = [
       { path: "typography", loadChildren: () => import("./admin/components/typography/typography.module").then(module => module.TypographyModule) },
       { path: "notifications", loadChildren: () => import("./admin/components/notification/notification.module").then(module => module.NotificationModule) },
       { path: "products", loadChildren: () => import("./admin/components/products/products.module").then(module => module.ProductsModule) },
+      { path: "orders", loadChildren: () => import("./admin/components/orders/orders.module").then(module => module.OrdersModule) },
     ], canActivate: [AuthGuard], canActivateChild: [AuthGuard]
   }
 ];

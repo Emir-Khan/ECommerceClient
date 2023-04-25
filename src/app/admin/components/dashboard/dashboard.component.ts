@@ -13,7 +13,8 @@ declare var Chartist: any;
 export class DashboardComponent implements OnInit {
 
   constructor(private notificationService: NotificationService, private signalRService: SignalRService) {
-    signalRService.start(HubUrls.ProductHub)
+    // signalRService.start(HubUrls.ProductHub)
+    // signalRService.start(HubUrls.OrderHub)
   }
 
   startAnimationForLineChart(chart) {
@@ -73,7 +74,10 @@ export class DashboardComponent implements OnInit {
     seq2 = 0;
   };
   ngOnInit() {
-    this.signalRService.on(ReceiveFunctions.ProductAddedMessageReceiveFunction, message => {
+    this.signalRService.on(HubUrls.ProductHub, ReceiveFunctions.ProductAddedMessageReceiveFunction, message => {
+      this.notificationService.showNotification(NotificationType.Info, "Info", message)
+    });
+    this.signalRService.on(HubUrls.OrderHub, ReceiveFunctions.OrderAddedMessageReceiveFunction, message => {
       this.notificationService.showNotification(NotificationType.Info, "Info", message)
     });
 

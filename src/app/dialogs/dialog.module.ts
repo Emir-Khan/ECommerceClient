@@ -6,18 +6,25 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { SelectProductImageDialogComponent } from './select-product-image-dialog/select-product-image-dialog.component';
 import { FileUploadModule } from '../services/common/file-upload/file-upload.module';
-import {MatIconModule} from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
 import { MatRadioModule } from '@angular/material/radio';
-
+import { BasketItemRemoveDialogComponent } from './basket-item-remove-dialog/basket-item-remove-dialog.component';
+import { ShoppingCompleteDialogComponent } from './shopping-complete-dialog/shopping-complete-dialog.component';
+import { OrderDetailDialogComponent } from './order-detail-dialog/order-detail-dialog.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatChipsModule } from '@angular/material/chips';
 
 @NgModule({
   declarations: [
     DeleteDialogComponent,
-    SelectProductImageDialogComponent
+    SelectProductImageDialogComponent,
+    BasketItemRemoveDialogComponent,
+    ShoppingCompleteDialogComponent,
+    OrderDetailDialogComponent
   ],
   imports: [
     CommonModule,
-    MatDialogModule, MatButtonModule, MatCardModule,MatIconModule,MatRadioModule,
+    MatDialogModule, MatButtonModule, MatCardModule, MatIconModule, MatRadioModule, MatTableModule, MatChipsModule,
     FileUploadModule
   ]
 })

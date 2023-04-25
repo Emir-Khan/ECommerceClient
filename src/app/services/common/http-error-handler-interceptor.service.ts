@@ -6,6 +6,7 @@ import { SpinnerType } from 'src/app/base/base.component';
 import { CustomToastrService, ToastrMessageType, ToastrPosition } from '../ui/custom-toastr.service';
 import { UserAuthService } from './models/user-auth.service';
 import { Router } from '@angular/router';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ import { Router } from '@angular/router';
 export class HttpErrorHandlerInterceptorService implements HttpInterceptor {
 
   constructor(private toastrService: CustomToastrService, private userAuthService: UserAuthService,
-    private spinner: NgxSpinnerService, private router: Router) { }
+    private spinner: NgxSpinnerService, private router: Router, private authService: AuthService) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(req).pipe(catchError(error => {
@@ -27,6 +28,7 @@ export class HttpErrorHandlerInterceptorService implements HttpInterceptor {
                   position: ToastrPosition.TopRight
                 });
               }
+              this.authService.identityCheck();
             }).catch(() => {
               const url = this.router.url;
               if (url == "/products")

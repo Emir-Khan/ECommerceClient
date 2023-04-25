@@ -57,6 +57,7 @@ import { HttpErrorHandlerInterceptorService } from './services/common/http-error
       } as SocialAuthServiceConfig
     },
     { provide: "baseUrl", useValue: "https://localhost:7131/api", multi: true },
+    { provide: "baseSignalRUrl", useValue: "https://localhost:7131/", multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: HttpErrorHandlerInterceptorService, multi: true }
   ],
   bootstrap: [AppComponent],
