@@ -4,6 +4,7 @@ import { ProductsModule } from './products/products.module';
 import { OrdersModule } from './orders/orders.module';
 import { RegisterModule } from './register/register.module';
 import { LoginModule } from './login/login.module';
+import { UpdatePasswordModule } from './update-password/update-password.module';
 
 
 
@@ -11,10 +12,11 @@ import { LoginModule } from './login/login.module';
   declarations: [],
   imports: [
     CommonModule,
-    // LoginModule,
+    LoginModule,
     RegisterModule,
     ProductsModule,
-    OrdersModule
+    OrdersModule,
+    UpdatePasswordModule
   ]
 })
 export class ComponentsModule { }

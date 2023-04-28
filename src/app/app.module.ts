@@ -18,7 +18,7 @@ import { HttpErrorHandlerInterceptorService } from './services/common/http-error
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    // LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -34,9 +34,7 @@ import { HttpErrorHandlerInterceptorService } from './services/common/http-error
         allowedDomains: ["localhost:7131"]
       }
     }),
-    SocialLoginModule,
-    ReactiveFormsModule,
-    GoogleSigninButtonModule
+    ReactiveFormsModule
   ],
   providers: [
     {

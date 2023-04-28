@@ -7,6 +7,7 @@ import { LoginComponent } from './ui/components/login/login.component';
 import { ProductsComponent } from './ui/components/products/products.component';
 import { RegisterComponent } from './ui/components/register/register.component';
 import { LayoutComponent as UIComponent } from './ui/layout/layout.component';
+import { UpdatePasswordComponent } from './ui/components/update-password/update-password.component';
 
 const routes: Routes = [
   {
@@ -20,6 +21,7 @@ const routes: Routes = [
   },
   { path: "register", component: RegisterComponent },
   { path: "login", component: LoginComponent },
+  { path: "update-password/:userId/:resetToken", component: UpdatePasswordComponent },
   {
     path: "admin", component: LayoutComponent, children: [
       { path: "", component: DashboardComponent },

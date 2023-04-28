@@ -43,15 +43,14 @@
         />
         <label for="floatingPassword">Password</label>
       </div>
+       <div class="mb-1">
+        <a class="link-primary" data-bs-toggle="modal" data-bs-target="#passwordResetModal">Forgot Password</a>
+      </div>
       <div class="d-flex justify-content-center mb-2 align-items-center">
         <asl-google-signin-button></asl-google-signin-button>
         <div class="ms-1 facebook" (click)="facebookLogin()"> <img src="assets\svg\facebook.svg" style="padding: 6px;" width="30px" height="30px"/></div>
       </div>
-      <!-- <div class="checkbox mb-3">
-        <label>
-          <input type="checkbox" value="remember-me" /> Remember me
-        </label>
-      </div> -->
+     
       <button class="w-100 btn btn-lg btn-primary" type="submit">
         Log In
       </button>
@@ -59,3 +58,5 @@
     </form>
   </main>
 </div>
+
+<app-password-reset></app-password-reset>

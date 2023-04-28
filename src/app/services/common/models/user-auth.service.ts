@@ -5,6 +5,7 @@ import { LoginUser } from 'src/app/contracts/login-user';
 import { TokenResponse } from 'src/app/contracts/token/token-response';
 import { CustomToastrService, ToastrMessageType, ToastrPosition } from '../../ui/custom-toastr.service';
 import { HttpClientService } from '../http-client.service';
+import { VerifyResetTokenResponse } from 'src/app/contracts/users/verify-reset-token-response';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,7 @@ import { HttpClientService } from '../http-client.service';
 export class UserAuthService {
 
   constructor(private httpClientService: HttpClientService, private toastrService: CustomToastrService) { }
+  
   async login(user: LoginUser, callBackFunction?: () => void) {
     const observable: Observable<any | TokenResponse> = this.httpClientService.post<any | TokenResponse>({
       controller: "auth",
@@ -68,7 +70,7 @@ export class UserAuthService {
     callBackFunction()
   }
 
-  async refreshTokenLogin(refreshToken: string, callBackFunction?: () => void):Promise<TokenResponse> {
+  async refreshTokenLogin(refreshToken: string, callBackFunction?: () => void): Promise<TokenResponse> {
     const observable: Observable<any | TokenResponse> = this.httpClientService.post({
       controller: "auth",
       action: "refreshtokenlogin"
@@ -82,5 +84,26 @@ export class UserAuthService {
     }
     callBackFunction();
     return tokenResponse
+  }
+
+  async passwordReset(email: string, callBackFunction?: () => void) {
+    const observable: Observable<any> = this.httpClientService.post({
+      controller: "auth",
+      action: "password-reset"
+    }, { email: email });
+
+    await firstValueFrom(observable);
+    callBackFunction();
+  }
+
+  async verifyResetToken(resetToken: string, userId: string, callBackFunction?: (state:VerifyResetTokenResponse) => void): Promise<VerifyResetTokenResponse> {
+    const observable: Observable<any> = this.httpClientService.post({
+      controller: "auth",
+      action: "verify-reset-token"
+    }, { resetToken: resetToken, userId: userId })
+
+    const response: VerifyResetTokenResponse = await firstValueFrom(observable);
+    callBackFunction(response);
+    return response;
   }
 }
