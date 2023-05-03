@@ -65,7 +65,7 @@
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="close()">Close</button>
-  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Complete Order</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial (click)="completeOrder()" *ngIf="!singleOrder.completed">Complete Order</button>
   <mat-chip selected color="primary" class="position-absolute total-price">
     <span style="color: white;">Total Price: <span class="fw-medium"><u>{{totalPrice |
           currency:"₺"}}</u></span></span>

@@ -4,6 +4,11 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { OrderService } from 'src/app/services/common/models/order.service';
 import { SingleOrder } from 'src/app/contracts/order/single-order';
+import { DialogService } from 'src/app/services/common/dialog.service';
+import { CompleteOrderDialogComponent, CompleteOrderState } from '../complete-order-dialog/complete-order-dialog.component';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { SpinnerType } from 'src/app/base/base.component';
+import { NotificationService, NotificationType } from 'src/app/services/admin/notification.service';
 
 @Component({
   selector: 'app-order-detail-dialog',
@@ -21,7 +26,10 @@ export class OrderDetailDialogComponent extends BaseDialog<OrderDetailDialogComp
 
   constructor(dialogRef: MatDialogRef<OrderDetailDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: OrderDetailDialogState | string,
-    private orderService: OrderService) {
+    private orderService: OrderService,
+    private dialogService: DialogService,
+    private spinner: NgxSpinnerService,
+    private notificationService: NotificationService) {
     super(dialogRef)
   }
 
@@ -36,6 +44,19 @@ export class OrderDetailDialogComponent extends BaseDialog<OrderDetailDialogComp
     this.singleOrder = await this.orderService.getById(this.data as string)
     this.dataSource = this.singleOrder.basketItems
     this.totalPrice = this.singleOrder.basketItems.map((basketItem, index) => basketItem.price * basketItem.quantity).reduce((price, current) => price + current);
+  }
+
+  completeOrder() {
+    this.dialogService.openDialog({
+      componentType: CompleteOrderDialogComponent,
+      data: CompleteOrderState.Yes,
+      afterClosed: async () => {
+        this.spinner.show(SpinnerType.RunningDots)
+        await this.orderService.completeOrder(this.data as string)
+        this.spinner.hide(SpinnerType.RunningDots)
+        this.notificationService.showNotification(NotificationType.Success, 'Success', "Order completed successfully")
+      }
+    })
   }
 }
 

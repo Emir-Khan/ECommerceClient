@@ -13,6 +13,7 @@ import { ShoppingCompleteDialogComponent } from './shopping-complete-dialog/shop
 import { OrderDetailDialogComponent } from './order-detail-dialog/order-detail-dialog.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatChipsModule } from '@angular/material/chips';
+import { CompleteOrderDialogComponent } from './complete-order-dialog/complete-order-dialog.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { MatChipsModule } from '@angular/material/chips';
     SelectProductImageDialogComponent,
     BasketItemRemoveDialogComponent,
     ShoppingCompleteDialogComponent,
-    OrderDetailDialogComponent
+    OrderDetailDialogComponent,
+    CompleteOrderDialogComponent
   ],
   imports: [
     CommonModule,

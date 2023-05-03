@@ -21,9 +21,14 @@
         <td mat-cell *matCellDef="let element">{{ element.createdDate | date}}</td>
       </ng-container>
 
+      <ng-container matColumnDef="completed">
+        <th class="text-danger" mat-header-cell *matHeaderCellDef width="30"></th>
+        <td mat-cell *matCellDef="let element"><i *ngIf="element.completed" class="material-icons user-select-none">done</i></td>
+      </ng-container>
+
       <ng-container matColumnDef="viewdetail">
         <th class="text-danger" mat-header-cell *matHeaderCellDef width="30"></th>
-        <td mat-cell *matCellDef="let element"><i class="material-icons cursor-pointer" (click)="showDetail(element.id)">info</i></td>
+        <td mat-cell *matCellDef="let element"><i class="material-icons cursor-pointer" (click)="showDetail(element.id)">info</i></td> <!-- *ngIf could use -->
       </ng-container>
 
       <ng-container matColumnDef="delete">
@@ -34,7 +39,7 @@
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns" [ngClass]="{'bg-info':row.completed}"></tr>
       
     </table>
     <mat-paginator

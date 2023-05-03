@@ -3,4 +3,5 @@ export class ListOrder {
   userName: string
   totalPrice: null
   createdDate: Date
+  completed: boolean
 }

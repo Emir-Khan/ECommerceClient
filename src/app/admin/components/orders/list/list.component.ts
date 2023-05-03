@@ -17,7 +17,7 @@ import { OrderService } from 'src/app/services/common/models/order.service';
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent extends BaseComponent implements OnInit {
-  displayedColumns: string[] = ["orderCode", "userName", "totalPrice", "createdDate", "viewdetail", "delete"]
+  displayedColumns: string[] = ["orderCode", "userName", "totalPrice", "createdDate", "completed", "viewdetail", "delete"]
   dataSource: MatTableDataSource<ListOrder> = new MatTableDataSource<ListOrder>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 

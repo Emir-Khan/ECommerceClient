@@ -43,4 +43,13 @@ export class OrderService {
 
     return await promise;
   }
+
+  async completeOrder(id: string) {
+    const observable = this.httpClientService.get({
+      controller: "orders",
+      action: "complete-order"
+    }, id);
+
+    await firstValueFrom(observable);
+  }
 }
