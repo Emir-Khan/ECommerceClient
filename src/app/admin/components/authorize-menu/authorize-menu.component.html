@@ -1,0 +1,27 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-3" *ngFor="let data of dataSource">
+        <div class="card">
+          <div class="card-header card-header-danger">
+            <h4 class="card-title">{{data.name}}</h4>
+            <p class="card-category"></p>
+          </div>
+          <div class="card-body">
+            <div *ngFor="let action of data.actions">
+              <mat-list>
+                <mat-list-item>
+                  <button mat-mini-fab (click)="assignRole(action.code,action.definition)" color="primary" style="position: absolute;right: 5px;top: 10px;" aria-label="Example icon button with a menu icon">
+                    <mat-icon>add</mat-icon>
+                  </button>
+                  <span matListItemTitle>{{action.definition}}</span>
+                  <span matListItemLine>{{action.code}}</span>
+                </mat-list-item>
+              </mat-list>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

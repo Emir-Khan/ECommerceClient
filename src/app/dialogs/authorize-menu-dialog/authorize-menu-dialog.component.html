@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>Assign Role to {{data["name"]}}</h1>
+<div mat-dialog-content>
+  <p>Do you want to assign a role to this {{data["code"]}} endpoint?</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="close()">No Thanks</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Yes</button>
+</div>

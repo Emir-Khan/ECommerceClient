@@ -34,9 +34,9 @@
         </li>
       </ul>
       <div class="d-flex align-items-center" role="search">
-        <div data-bs-toggle="modal" data-bs-target="#basketModal">
+        <div class="me-2" data-bs-toggle="modal" data-bs-target="#basketModal" (click)="loadComponent()">
           <a class="basket-icon text-dark">
-            <i class="fa-solid fa-cart-shopping" (click)="loadComponent()"></i>
+            <i class="fa-solid fa-cart-shopping"></i>
             Sepetim
           </a>
         </div>

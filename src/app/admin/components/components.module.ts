@@ -7,6 +7,7 @@ import { TableListModule } from './table-list/table-list.module';
 import { TypographyModule } from './typography/typography.module';
 import { ProductsModule } from './products/products.module';
 import { OrdersModule } from './orders/orders.module';
+import { AuthorizeMenuModule } from './authorize-menu/authorize-menu.module';
 
 
 
@@ -20,7 +21,8 @@ import { OrdersModule } from './orders/orders.module';
     TableListModule,
     TypographyModule,
     ProductsModule,
-    OrdersModule
+    OrdersModule,
+    AuthorizeMenuModule
   ]
 })
 export class ComponentsModule { }
