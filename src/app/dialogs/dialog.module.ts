@@ -15,6 +15,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatChipsModule } from '@angular/material/chips';
 import { CompleteOrderDialogComponent } from './complete-order-dialog/complete-order-dialog.component';
 import { AuthorizeMenuDialogComponent } from './authorize-menu-dialog/authorize-menu-dialog.component';
+import { MatListModule } from '@angular/material/list';
+import { MatBadgeModule } from '@angular/material/badge';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,8 @@ import { AuthorizeMenuDialogComponent } from './authorize-menu-dialog/authorize-
   ],
   imports: [
     CommonModule,
-    MatDialogModule, MatButtonModule, MatCardModule, MatIconModule, MatRadioModule, MatTableModule, MatChipsModule,
+    MatDialogModule, MatButtonModule, MatCardModule, MatIconModule,
+    MatRadioModule, MatTableModule, MatChipsModule, MatListModule, MatBadgeModule,
     FileUploadModule
   ]
 })

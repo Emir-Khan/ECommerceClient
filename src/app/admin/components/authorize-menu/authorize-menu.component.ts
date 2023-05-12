@@ -18,12 +18,12 @@ export class AuthorizeMenuComponent implements OnInit {
   async ngOnInit() {
     this.dataSource = await this.applicationService.getAuthorizeDefinitionEndpoints();
   }
-  assignRole(code: string, name: string) {
+  assignRole(code: string, definition: string, menuName: string) {
     console.log(code);
 
     this.dialogService.openDialog({
       componentType: AuthorizeMenuDialogComponent,
-      data: { code, name }
+      data: { code, definition, menuName }
     })
   }
 }

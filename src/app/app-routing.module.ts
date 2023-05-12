@@ -32,6 +32,7 @@ const routes: Routes = [
       { path: "products", loadChildren: () => import("./admin/components/products/products.module").then(module => module.ProductsModule) },
       { path: "orders", loadChildren: () => import("./admin/components/orders/orders.module").then(module => module.OrdersModule) },
       { path: "authorize-menu", loadChildren: () => import("./admin/components/authorize-menu/authorize-menu.module").then(module => module.AuthorizeMenuModule) },
+      { path: "roles", loadChildren: () => import("./admin/components/role/role.module").then(module => module.RoleModule) },
     ], canActivate: [AuthGuard], canActivateChild: [AuthGuard]
   }
 ];

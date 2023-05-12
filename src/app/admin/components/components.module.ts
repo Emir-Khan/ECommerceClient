@@ -8,6 +8,7 @@ import { TypographyModule } from './typography/typography.module';
 import { ProductsModule } from './products/products.module';
 import { OrdersModule } from './orders/orders.module';
 import { AuthorizeMenuModule } from './authorize-menu/authorize-menu.module';
+import { RoleModule } from './role/role.module';
 
 
 
@@ -22,7 +23,8 @@ import { AuthorizeMenuModule } from './authorize-menu/authorize-menu.module';
     TypographyModule,
     ProductsModule,
     OrdersModule,
-    AuthorizeMenuModule
+    AuthorizeMenuModule,
+    RoleModule
   ]
 })
 export class ComponentsModule { }

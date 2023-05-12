@@ -11,7 +11,7 @@
             <div *ngFor="let action of data.actions">
               <mat-list>
                 <mat-list-item>
-                  <button mat-mini-fab (click)="assignRole(action.code,action.definition)" color="primary" style="position: absolute;right: 5px;top: 10px;" aria-label="Example icon button with a menu icon">
+                  <button mat-mini-fab (click)="assignRole(action.code, action.definition, data.name)" color="primary" style="position: absolute;right: 5px;top: 10px;" aria-label="Example icon button with a menu icon">
                     <mat-icon>add</mat-icon>
                   </button>
                   <span matListItemTitle>{{action.definition}}</span>

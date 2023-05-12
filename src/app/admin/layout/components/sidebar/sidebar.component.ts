@@ -17,6 +17,7 @@ export const ROUTES: RouteInfo[] = [
   { path: '/admin/products', title: 'Products', icon: 'shopping_bag', class: '', exact: true },
   { path: '/admin/orders', title: 'Orders', icon: 'shopping_basket', class: '', exact: true },
   { path: '/admin/authorize-menu', title: 'Authorize Menu', icon: 'manage_accounts', class: '', exact: true },
+  { path: '/admin/roles', title: 'Roles', icon: 'groups', class: '', exact: true },
   { path: '/admin/upgrade', title: 'Upgrade to PRO', icon: 'unarchive', class: 'active-pro', exact: true },
 ];
 

@@ -18,11 +18,8 @@ export class DialogService {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
-      
-      if (result == dialogParameter.data) {
-        dialogParameter.afterClosed();
-      }
+      if (result == dialogParameter.data)
+        dialogParameter.afterClosed?.();
     });
   }
 }
@@ -30,7 +27,7 @@ export class DialogService {
 export class DialogParameters {
   componentType: ComponentType<any>
   data: any
-  afterClosed: () => void;
+  afterClosed?: () => void;
   options: Partial<DialogOptions> = new DialogOptions()
 }
 
