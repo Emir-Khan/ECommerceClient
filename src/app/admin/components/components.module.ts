@@ -9,6 +9,7 @@ import { ProductsModule } from './products/products.module';
 import { OrdersModule } from './orders/orders.module';
 import { AuthorizeMenuModule } from './authorize-menu/authorize-menu.module';
 import { RoleModule } from './role/role.module';
+import { UsersModule } from './users/users.module';
 
 
 
@@ -24,7 +25,8 @@ import { RoleModule } from './role/role.module';
     ProductsModule,
     OrdersModule,
     AuthorizeMenuModule,
-    RoleModule
+    RoleModule,
+    UsersModule
   ]
 })
 export class ComponentsModule { }

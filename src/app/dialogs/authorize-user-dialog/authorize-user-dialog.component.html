@@ -1,0 +1,17 @@
+<h1 mat-dialog-title>Assign Role to {{data.userName}}<mat-chip selected color="primary"
+    class="position-absolute order-no">
+    <span style="color: white;">{{selectedRoles.selectedOptions.selected.length}}/{{roles?.totalRoleCount}}</span>
+  </mat-chip></h1>
+<div mat-dialog-content>
+  <p>Do you want to assign role to this {{data.userName}} user?</p>
+  <mat-selection-list #selectedRoles>
+    <mat-list-option *ngFor="let role of roles?.data" [value]="role" [selected]="isRoleExist(role.name)">
+      {{role.name}}
+    </mat-list-option>
+  </mat-selection-list>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="close()">Cancel</button>
+  <button mat-button [mat-dialog-close]="data" (click)="assignRoles(selectedRoles.selectedOptions.selected)"
+    cdkFocusInitial>Assign Roles</button>
+</div>

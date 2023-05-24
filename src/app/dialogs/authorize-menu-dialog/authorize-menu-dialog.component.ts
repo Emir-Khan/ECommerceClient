@@ -38,7 +38,7 @@ export class AuthorizeMenuDialogComponent extends BaseDialog<AuthorizeMenuDialog
   }
 
   isRoleExist(roleName: string): boolean {
-    return this.endpointRoles.includes(roleName);
+    return this.endpointRoles?.includes(roleName);
   }
 }
 export enum AuthorizeMenuState {
