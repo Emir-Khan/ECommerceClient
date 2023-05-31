@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>Product QR Code</h1>
+<div mat-dialog-content>
+  <img [src]="qrCodeSafeUrl" alt="QE Code" width="350" height="350">
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="close()">No Thanks</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Ok</button>
+</div>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { CreateUser } from 'src/app/contracts/users/create-user';
 import { User } from 'src/app/entities/user';
 import { UserService } from 'src/app/services/common/models/user.service';
@@ -15,7 +16,8 @@ export class RegisterComponent implements OnInit {
   submitted: boolean
   constructor(private formBuilder: FormBuilder,
     private toastrService: CustomToastrService,
-    private userService: UserService) { }
+    private userService: UserService,
+    private router: Router) { }
   ngOnInit(): void {
     this.form = this.formBuilder.group({
       nameSurname: ["", [Validators.required, Validators.maxLength(50), Validators.minLength(3)]],
@@ -43,11 +45,13 @@ export class RegisterComponent implements OnInit {
       return;
 
     const result: CreateUser = await this.userService.create(user);
-    if (result.succeeded)
+    if (result.succeeded) {
       this.toastrService.message(result.message, "Registration Success", {
         messageType: ToastrMessageType.Success,
         position: ToastrPosition.TopRight
       })
+      this.router.navigate(["/login"])
+    }
     else
       this.toastrService.message(result.message, "Error", {
         messageType: ToastrMessageType.Error,

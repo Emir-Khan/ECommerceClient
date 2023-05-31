@@ -2,12 +2,12 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-3" *ngFor="let data of dataSource">
-        <div class="card">
+        <div class="card" style="max-height: 379px !important;">
           <div class="card-header card-header-danger">
             <h4 class="card-title">{{data.name}}</h4>
             <p class="card-category"></p>
           </div>
-          <div class="card-body">
+          <div class="card-body" style="max-height: 342px !important;overflow: auto;">
             <div *ngFor="let action of data.actions">
               <mat-list>
                 <mat-list-item>

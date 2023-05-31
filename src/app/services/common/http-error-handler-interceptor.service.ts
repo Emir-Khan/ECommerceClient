@@ -61,6 +61,12 @@ export class HttpErrorHandlerInterceptorService implements HttpInterceptor {
             position: ToastrPosition.TopRight
           });
           break;
+        case HttpStatusCode.Forbidden:
+          this.toastrService.message("You are not authorized to do this operation", "Unauthorized Operation", {
+            messageType: ToastrMessageType.Warning,
+            position: ToastrPosition.TopRight
+          });
+          break;
         default:
           this.toastrService.message("Unknown Error", "Warning", {
             messageType: ToastrMessageType.Warning,

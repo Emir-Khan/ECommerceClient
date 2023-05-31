@@ -21,7 +21,7 @@ export class HttpClientService {
     else
       url = `${this.url(requestParameters)}${id ? `/${id}` : ""}${requestParameters.queryString ? `?${requestParameters.queryString}` : ""}`;
 
-    return this.httpClient.get<T>(url, { headers: requestParameters.headers })
+    return this.httpClient.get<T>(url, { headers: requestParameters.headers, responseType: requestParameters.responseType as 'json' })
   }
   post<T>(requestParameters: Partial<RequestParameters>, body: Partial<T>): Observable<T> {
     let url: string;
@@ -30,7 +30,7 @@ export class HttpClientService {
     else
       url = `${this.url(requestParameters)}${requestParameters.queryString ? `?${requestParameters.queryString}` : ""}`
 
-    return this.httpClient.post<T>(url, body, { headers: requestParameters.headers })
+    return this.httpClient.post<T>(url, body, { headers: requestParameters.headers, responseType: requestParameters.responseType as 'json' })
   }
   put<T>(requestParameters: Partial<RequestParameters>, body: Partial<T>): Observable<T> {
     let url: string;
@@ -39,7 +39,7 @@ export class HttpClientService {
     else
       url = `${this.url(requestParameters)}${requestParameters.queryString ? `?${requestParameters.queryString}` : ""}`
 
-    return this.httpClient.put<T>(url, body, { headers: requestParameters.headers })
+    return this.httpClient.put<T>(url, body, { headers: requestParameters.headers, responseType: requestParameters.responseType as 'json' })
   }
   delete<T>(requestParameters: Partial<RequestParameters>, id: string): Observable<T> {
     let url: string;
@@ -48,7 +48,7 @@ export class HttpClientService {
     else
       url = `${this.url(requestParameters)}/${id}${requestParameters.queryString ? `?${requestParameters.queryString}` : ""}`
 
-    return this.httpClient.delete<T>(url, { headers: requestParameters.headers })
+    return this.httpClient.delete<T>(url, { headers: requestParameters.headers, responseType: requestParameters.responseType as 'json' })
   }
 }
 export class RequestParameters {
@@ -59,4 +59,6 @@ export class RequestParameters {
   headers?: HttpHeaders;
   baseUrl?: string;
   fullEndPoint?: string;
+
+  responseType?: string = "json";
 }
