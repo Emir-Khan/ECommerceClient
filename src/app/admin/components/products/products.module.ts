@@ -13,6 +13,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { FileUploadModule } from 'src/app/services/common/file-upload/file-upload.module';
 import { DialogModule } from 'src/app/dialogs/dialog.module';
 import { DeleteModule } from 'src/app/directives/admin/delete.directive.module';
+import { MatIconModule } from '@angular/material/icon';
 
 
 @NgModule({
@@ -29,7 +30,7 @@ import { DeleteModule } from 'src/app/directives/admin/delete.directive.module';
     DeleteModule,
     FileUploadModule,
     DialogModule,
-    MatInputModule, MatFormFieldModule, MatTableModule, MatPaginatorModule, MatDialogModule, MatButtonModule
+    MatInputModule, MatFormFieldModule, MatTableModule, MatPaginatorModule, MatDialogModule, MatButtonModule, MatIconModule
   ]
 })
 export class ProductsModule { }

@@ -5,6 +5,7 @@ import { CreateProduct } from 'src/app/contracts/create-product';
 import { ListProduct } from 'src/app/contracts/list-product';
 import { ListProductImage } from 'src/app/contracts/list-product-image';
 import { HttpClientService } from '../http-client.service';
+import { ProductShowCaseImage } from 'src/app/contracts/product-show-case-image';
 
 @Injectable({
   providedIn: 'root'
@@ -50,6 +51,13 @@ export class ProductService {
     successCallBack();
     return images;
   }
+  async getShowCaseImage(id: string): Promise<ProductShowCaseImage> {
+    const getObservable: Observable<ProductShowCaseImage> = this.httpClientService.get<ProductShowCaseImage>({
+      action: "GetShowcaseImage", controller: "products", queryString: `Id=${id}`
+    })
+    const image: ProductShowCaseImage = await firstValueFrom(getObservable)
+    return image;
+  }
   async deleteImage(id: string, imageId: string, successCallBack?: () => void) {
     const deleteObservable = this.httpClientService.delete({
       action: "deleteproductimage",
@@ -68,5 +76,15 @@ export class ProductService {
     await firstValueFrom(observable);
 
     successCallBack();
+  }
+
+  async updateQrCodeProductStock(productId: string, stock: number, successCallBack?: () => void) {
+    const observable = this.httpClientService.put({
+      controller: "products",
+      action: "qrcode",
+    }, { productId, stock })
+    await firstValueFrom(observable);
+
+    successCallBack?.();
   }
 }

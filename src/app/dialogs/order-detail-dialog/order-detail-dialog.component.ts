@@ -9,6 +9,7 @@ import { CompleteOrderDialogComponent, CompleteOrderState } from '../complete-or
 import { NgxSpinnerService } from 'ngx-spinner';
 import { SpinnerType } from 'src/app/base/base.component';
 import { NotificationService, NotificationType } from 'src/app/services/admin/notification.service';
+import { ProductService } from 'src/app/services/common/models/product.service';
 
 @Component({
   selector: 'app-order-detail-dialog',
@@ -27,6 +28,7 @@ export class OrderDetailDialogComponent extends BaseDialog<OrderDetailDialogComp
   constructor(dialogRef: MatDialogRef<OrderDetailDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: OrderDetailDialogState | string,
     private orderService: OrderService,
+    private productService: ProductService,
     private dialogService: DialogService,
     private spinner: NgxSpinnerService,
     private notificationService: NotificationService) {
@@ -39,6 +41,7 @@ export class OrderDetailDialogComponent extends BaseDialog<OrderDetailDialogComp
   expandedElement: any | null;
   singleOrder: SingleOrder
   totalPrice: number;
+  showCaseImageUrl: string;
 
   async ngOnInit() {
     this.singleOrder = await this.orderService.getById(this.data as string)
@@ -57,6 +60,10 @@ export class OrderDetailDialogComponent extends BaseDialog<OrderDetailDialogComp
         this.notificationService.showNotification(NotificationType.Success, 'Success', "Order completed successfully")
       }
     })
+  }
+
+  async getProductImage(productId: any) {
+    this.showCaseImageUrl = (await this.productService.getShowCaseImage(productId)).path
   }
 }
 

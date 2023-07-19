@@ -3,9 +3,13 @@
     <div class="row">
       <div class="col-md-12">
         <div class="card">
-          <div class="card-header card-header-danger">
+          <div class="card-header card-header-danger position-relative">
             <h4 class="card-title">Products</h4>
             <p class="card-category">Add Products</p>
+            <button mat-mini-fab (click)="showProductQrCodeScanningDialog()" color="primary" class="position-absolute" style="top: 15px; right: 10px;"
+              aria-label="Example icon button with a menu icon">
+              <mat-icon>qr_code_scanner</mat-icon>
+            </button>
           </div>
           <div class="card-body row">
             <div class="col-4">

@@ -1,0 +1,4 @@
+{
+  "appService.defaultWebAppToDeploy": "/subscriptions/7fd1347f-679d-43aa-a9f1-b796923fe89d/resourceGroups/appsvc_windows_centralus/providers/Microsoft.Web/sites/EmirhanECommerceClient",
+  "appService.deploySubpath": "dist"
+}
