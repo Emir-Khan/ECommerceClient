@@ -8,6 +8,8 @@ import { CustomToastrService, ToastrMessageType, ToastrPosition } from 'src/app/
 import { Product } from 'src/app/contracts/product';
 import { ProductService } from 'src/app/services/common/models/product.service';
 import { SpinnerType } from 'src/app/base/base.component';
+import { DialogService } from 'src/app/services/common/dialog.service';
+import { QrcodeCompleteDialogComponent } from '../qrcode-complete-dialog/qrcode-complete-dialog.component';
 
 @Component({
   selector: 'app-qrcode-scanning-dialog',
@@ -20,6 +22,7 @@ export class QrcodeScanningDialogComponent extends BaseDialog<QrcodeScanningDial
     @Inject(MAT_DIALOG_DATA) public data: any,
     private qrCodeService: QrCodeService,
     private spinner: NgxSpinnerService,
+    private dialogService: DialogService,
     private toastrService: CustomToastrService,
     private productService: ProductService
   ) {
@@ -34,18 +37,30 @@ export class QrcodeScanningDialogComponent extends BaseDialog<QrcodeScanningDial
   }
 
   ngOnDestroy(): void {
+    console.log("here");
+
     this.scanner.stop()
   }
 
-  async onEvent(e) {
+  onEvent(e) {
+    console.log("hi");
+
     this.spinner.show(SpinnerType.RunningDots)
     const { data } = e
     if (data != null && data != '' && data != undefined) {
       const jsonData = JSON.parse(data)
       const stockValue = parseInt(this.txtStock.nativeElement.value)
-      this.toastrService.message(`${jsonData.Name} Product Stock Information Updated To ${stockValue}`, "Success", { messageType: ToastrMessageType.Success, position: ToastrPosition.TopRight })
-      this.close()
-      await this.productService.updateQrCodeProductStock(jsonData.Id, stockValue);
+      this.dialogService.openDialog({
+        componentType: QrcodeCompleteDialogComponent,
+        data: { ...jsonData, NewStock: stockValue },
+        afterClosed: async () => {
+          this.spinner.show(SpinnerType.RunningDots)
+          this.close()
+          await this.productService.updateQrCodeProductStock(jsonData.Id, stockValue);
+          this.toastrService.message(`${jsonData.Name} Product Stock Information Updated To ${stockValue}`, "Success", { messageType: ToastrMessageType.Success, position: ToastrPosition.TopRight })
+          this.spinner.hide(SpinnerType.RunningDots)
+        }
+      })
     }
     else {
       this.toastrService.message(`Invalid QR Code`, "Error", { messageType: ToastrMessageType.Error, position: ToastrPosition.TopRight })

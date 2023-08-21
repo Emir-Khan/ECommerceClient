@@ -21,7 +21,7 @@
               <td>{{basketItem.name}}</td>
               <td>{{basketItem.price}}</td>
               <td><input class="form-control quantity" type="number" value="{{basketItem.quantity}}"
-                  (change)="changeQuantity($event,basketItem.basketItemId)"></td>
+                  (change)="changeQuantity($event,basketItem.basketItemId,basketItem.quantity)"></td>
               <td><button type="button" class="btn-close" (click)="removeBasketItem(basketItem.basketItemId)"></button></td>
             </tr>
           </tbody>

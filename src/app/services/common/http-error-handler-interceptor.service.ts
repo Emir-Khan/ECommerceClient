@@ -21,30 +21,36 @@ export class HttpErrorHandlerInterceptorService implements HttpInterceptor {
       switch (error.status) {
         case HttpStatusCode.Unauthorized:
           try {
-            this.userAuthService.refreshTokenLogin(localStorage.getItem("refreshToken"), () => this.spinner.hide(SpinnerType.RunningDots)).then(({ token }) => {
-              if (!token.refreshToken) {
-                this.toastrService.message("You are not authorized to do this operation", "Unauthorized Operation", {
-                  messageType: ToastrMessageType.Warning,
-                  position: ToastrPosition.TopRight
-                });
-              }
-              this.authService.identityCheck();
-            }).catch(() => {
-              const url = this.router.url;
-              if (url == "/products")
-                this.toastrService.message("You need to be logged in to add products to the cart.", "Please Login", {
-                  messageType: ToastrMessageType.Warning,
-                  position: ToastrPosition.TopRight
-                });
-              this.spinner.hide(SpinnerType.RunningDots)
-            })
-            // need update
+            // const url = this.router.url;
+            // if (url.includes("/products")) {
+            //   this.toastrService.message("You need to be logged in to add products to the cart.", "Please Login", {
+            //     messageType: ToastrMessageType.Warning,
+            //     position: ToastrPosition.TopRight
+            //   });
+            // }
+
+            const refreshToken = localStorage.getItem("refreshToken");
+            if (refreshToken)
+              this.userAuthService.refreshTokenLogin(refreshToken, () => this.spinner.hide(SpinnerType.RunningDots)).then(({ token }) => {
+                if (!token.refreshToken) {
+                  this.toastrService.message("You are not authorized to do this operation", "Unauthorized Operation", {
+                    messageType: ToastrMessageType.Warning,
+                    position: ToastrPosition.TopRight
+                  });
+                }
+                this.authService.identityCheck();
+              })
+            else
+              this.toastrService.message("You are not authorized to do this operation", "Unauthorized Operation", {
+                messageType: ToastrMessageType.Warning,
+                position: ToastrPosition.TopRight
+              });
           } catch (error) {
             console.log(error);
           }
           break;
         case HttpStatusCode.InternalServerError:
-          this.toastrService.message("Unable to Access Server", "Warning", {
+          this.toastrService.message(error.error.Message, "Warning", {
             messageType: ToastrMessageType.Warning,
             position: ToastrPosition.TopRight
           });
@@ -74,7 +80,7 @@ export class HttpErrorHandlerInterceptorService implements HttpInterceptor {
           });
           break;
       }
-
+      this.spinner.hide(SpinnerType.RunningDots)
       return of(error)
     }))
   }

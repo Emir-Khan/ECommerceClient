@@ -31,11 +31,15 @@ export class BasketComponent implements OnInit {
     this.spinner.hide(SpinnerType.RunningDots)
   }
 
-  async changeQuantity(event: Event, basketItemId: string) {
+  async changeQuantity(event: any, basketItemId: string, prevQuantity: number) {
     this.spinner.show(SpinnerType.RunningDots)
     const input = event.target as HTMLInputElement;
     const quantity: number = parseInt(input.value);
-    await this.basketService.updateQuantity({ basketItemId, quantity })
+    try {
+      await this.basketService.updateQuantity({ basketItemId, quantity })
+    } catch (error) {
+      event.target.value = prevQuantity;
+    }
     this.spinner.hide(SpinnerType.RunningDots)
   }
 

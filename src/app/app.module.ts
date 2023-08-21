@@ -31,7 +31,7 @@ import { HttpErrorHandlerInterceptorService } from './services/common/http-error
     JwtModule.forRoot({
       config: {
         tokenGetter: () => localStorage.getItem("accessToken"),
-        allowedDomains: ["ecommerceapiapi20230718135833.azurewebsites.net:7131"]
+        allowedDomains: ["ecommerceapiapi20230718135833.azurewebsites.net"]
       }
     }),
     ReactiveFormsModule

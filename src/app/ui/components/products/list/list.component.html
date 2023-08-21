@@ -17,7 +17,7 @@
         <span aria-hidden="true">&laquo;</span>
       </a>
     </li>
-    <li class="page-item" *ngFor="let pageNo of pageList"><a class="page-link" routerLinkActive="active"
+    <li class="page-item" *ngFor="let pageNo of pageList"><a class="page-link" [ngClass]="{'active': currentPageNo == pageNo}"
         [routerLink]="['/products',pageNo]">{{pageNo}}</a></li>
     <li class="page-item">
       <a class="page-link"
