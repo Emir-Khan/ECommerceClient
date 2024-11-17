@@ -37,14 +37,10 @@ export class QrcodeScanningDialogComponent extends BaseDialog<QrcodeScanningDial
   }
 
   ngOnDestroy(): void {
-    console.log("here");
-
     this.scanner.stop()
   }
 
   onEvent(e) {
-    console.log("hi");
-
     this.spinner.show(SpinnerType.RunningDots)
     const { data } = e
     if (data != null && data != '' && data != undefined) {

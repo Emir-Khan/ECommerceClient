@@ -3,7 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatListOption } from '@angular/material/list';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { SpinnerType } from 'src/app/base/base.component';
-import { GetRolesResponse } from 'src/app/contracts/role/GetRolesResponse';
+import { GetRolesResponse } from 'src/app/contracts/role/get-roles-response';
 import { AuthorizationEndpointService } from 'src/app/services/common/models/authorization-endpoint.service';
 import { RoleService } from 'src/app/services/common/models/role.service';
 import { BaseDialog } from '../base/base-dialog';

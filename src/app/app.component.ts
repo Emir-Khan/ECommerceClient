@@ -11,7 +11,7 @@ import { SpinnerType } from './base/base.component';
 export class AppComponent implements OnInit {
   currentRoute: string;
 
-  constructor(private spinner: NgxSpinnerService, private router: Router) {
+  constructor(private spinner: NgxSpinnerService, private router: Router) {    
     this.currentRoute = "";
     this.router.events.subscribe((event: any) => {
       if (event instanceof NavigationStart) {

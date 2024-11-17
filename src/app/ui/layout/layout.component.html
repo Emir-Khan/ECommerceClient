@@ -13,7 +13,7 @@
         <li class="nav-item">
           <a class="nav-link" aria-current="page" routerLink="products" routerLinkActive="active">Products</a>
         </li>
-        <li class="nav-item" *ngIf="authService.isAuthenticated">
+        <li class="nav-item" *ngIf="authService.isAuthenticated && userService.isAdmin">
           <a class="nav-link" routerLink="/admin">Admin Pannel</a>
         </li>
         <li class="nav-item dropdown">
@@ -38,6 +38,12 @@
           <a class="basket-icon text-dark">
             <i class="fa-solid fa-cart-shopping"></i>
             Sepetim
+          </a>
+        </div>
+        <div class="me-2">
+          <a class="user-icon text-dark">
+            <i class="fa-solid fa-user"></i>
+            {{user?.nameSurname}}
           </a>
         </div>
         <button class="btn btn-outline-success me-1" *ngIf="!authService.isAuthenticated" routerLink="login">Log

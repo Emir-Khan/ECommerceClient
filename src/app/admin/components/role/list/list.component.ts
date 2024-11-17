@@ -3,7 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { BaseComponent } from 'src/app/base/base.component';
-import { ListRole } from 'src/app/contracts/role/ListRole';
+import { ListRole } from 'src/app/contracts/role/list-role';
 import { NotificationService, NotificationType } from 'src/app/services/admin/notification.service';
 import { RoleService } from 'src/app/services/common/models/role.service';
 

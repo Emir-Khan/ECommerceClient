@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { BaseDialog } from '../base/base-dialog';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { RoleService } from 'src/app/services/common/models/role.service';
-import { GetRolesResponse } from 'src/app/contracts/role/GetRolesResponse';
+import { GetRolesResponse } from 'src/app/contracts/role/get-roles-response';
 import { MatListOption } from '@angular/material/list';
 import { AuthorizationEndpointService } from 'src/app/services/common/models/authorization-endpoint.service';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -31,9 +31,8 @@ export class AuthorizeMenuDialogComponent extends BaseDialog<AuthorizeMenuDialog
 
   assignRoles(selectedRoles: MatListOption[]) {
     this.spinner.show(SpinnerType.RunningDots);
-    const roles = selectedRoles.map(role => role.value.name)
-    console.log(this.data, roles);
 
+    const roles = selectedRoles.map(role => role.value.name)
     this.authorizationEndpointService.assignRoleEndpoint(roles, this.data.code, this.data.menuName, () => { this.spinner.hide(SpinnerType.RunningDots); })
   }
 

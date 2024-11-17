@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClientService } from '../http-client.service';
 import { Observable, firstValueFrom } from 'rxjs';
-import { ListRole } from 'src/app/contracts/role/ListRole';
-import { GetRolesResponse } from 'src/app/contracts/role/GetRolesResponse';
+import { ListRole } from 'src/app/contracts/role/list-role';
+import { GetRolesResponse } from 'src/app/contracts/role/get-roles-response';
 
 @Injectable({
   providedIn: 'root'
@@ -17,12 +17,15 @@ export class RoleService {
       queryString: `page=${page}&size=${size}`
     })
 
-    const promise = firstValueFrom(observable)
+    const promise = firstValueFrom<GetRolesResponse>(observable)
 
     promise.then(response => successCallBack?.())
       .catch(error => errorCallBack?.(error.message))
 
-    return await promise;
+    const result = await promise;
+    // sort the roles by name
+    result.data = result.data.sort((a, b) => a.name.localeCompare(b.name));
+    return result;
   }
 
   async create(name: string, successCallBack?: () => void, errorCallBack?: (msg: string) => void) {

@@ -1,4 +1,4 @@
-import { ListRole } from "./ListRole"
+import { ListRole } from "./list-role"
 
 export class GetRolesResponse{
     data: ListRole[]

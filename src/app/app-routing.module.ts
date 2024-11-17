@@ -8,6 +8,7 @@ import { ProductsComponent } from './ui/components/products/products.component';
 import { RegisterComponent } from './ui/components/register/register.component';
 import { LayoutComponent as UIComponent } from './ui/layout/layout.component';
 import { UpdatePasswordComponent } from './ui/components/update-password/update-password.component';
+import { AdminDashboardGuard } from './guards/admin/admin-dashboard.guard';
 
 const routes: Routes = [
   {
@@ -34,7 +35,7 @@ const routes: Routes = [
       { path: "authorize-menu", loadChildren: () => import("./admin/components/authorize-menu/authorize-menu.module").then(module => module.AuthorizeMenuModule) },
       { path: "roles", loadChildren: () => import("./admin/components/role/role.module").then(module => module.RoleModule) },
       { path: "users", loadChildren: () => import("./admin/components/users/users.module").then(module => module.UsersModule) },
-    ], canActivate: [AuthGuard], canActivateChild: [AuthGuard]
+    ], canActivate: [AuthGuard, AdminDashboardGuard], canActivateChild: [AuthGuard, AdminDashboardGuard]
   }
 ];
 

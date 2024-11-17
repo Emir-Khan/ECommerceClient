@@ -37,6 +37,7 @@ export class ListComponent implements OnInit {
         errorMessage => {
 
         });
+      const storageBaseUrl = (await this.fileService.getBaseStorageUrl()).url;
       this.products = await Promise.all(data.products.map(async ({ id, name, price, stock, createdDate, updatedDate, productImageFiles }) => {
         const imgPath = productImageFiles.find(pif => pif.showCase)?.path;
         const listProduct: ListProduct = {
@@ -46,7 +47,7 @@ export class ListComponent implements OnInit {
           stock,
           createdDate,
           updatedDate,
-          imagePath: productImageFiles.length && imgPath ? `${(await this.fileService.getBaseStorageUrl()).url}/${imgPath}` : "assets/img/product/default-product.png"
+          imagePath: productImageFiles.length && imgPath ? `${storageBaseUrl}/${imgPath}` : "assets/img/product/default-product.png"
         };
         return listProduct;
       }));
@@ -56,20 +57,24 @@ export class ListComponent implements OnInit {
 
       this.pageList = [];
 
-      if (this.currentPageNo - 3 <= 0)
-        for (let i = 1; i <= 7; i++) {
-          this.pageList.push(i);
-          if (this.totalPageCount == i)
-            break;
+      const startPage = Math.max(1, this.currentPageNo - 3);
+      const endPage = Math.min(this.totalPageCount, this.currentPageNo + 3);
+
+      for (let i = startPage; i <= endPage; i++) {
+        this.pageList.push(i);
+      }
+
+      if (this.pageList.length < 7) {
+        if (startPage === 1) {
+          for (let i = endPage + 1; i <= Math.min(this.totalPageCount, endPage + (7 - this.pageList.length)); i++) {
+            this.pageList.push(i);
+          }
+        } else if (endPage === this.totalPageCount) {
+          for (let i = startPage - 1; i >= Math.max(1, startPage - (7 - this.pageList.length)); i--) {
+            this.pageList.unshift(i);
+          }
         }
-
-      else if (this.currentPageNo + 3 >= this.totalPageCount)
-        for (let i = this.totalPageCount - 6; i <= this.totalPageCount; i++)
-          this.pageList.push(i);
-
-      else
-        for (let i = this.currentPageNo - 3; i <= this.currentPageNo + 3; i++)
-          this.pageList.push(i);
+      }
     })
 
   }

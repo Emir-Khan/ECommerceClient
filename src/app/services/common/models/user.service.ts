@@ -4,11 +4,13 @@ import { CreateUser } from 'src/app/contracts/users/create-user';
 import { User } from 'src/app/entities/user';
 import { HttpClientService } from '../http-client.service';
 import { ListUser } from 'src/app/contracts/users/list-users';
+import { UserDetail } from 'src/app/contracts/users/user-detail';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
+  private user: UserDetail;
   constructor(private httpClientService: HttpClientService) { }
 
   async create(user: User): Promise<CreateUser> {
@@ -46,6 +48,21 @@ export class UserService {
     return await promise;
   }
 
+  async getMe(successCallback?: () => void, errorCallback?: (error: any) => void): Promise<UserDetail> {
+    const observable: Observable<UserDetail> = this.httpClientService.get({
+      controller: "users",
+      action: "me"
+    });
+
+    const promise = firstValueFrom(observable);
+    promise.then((data) => {
+      this.user = data;
+      successCallback?.()
+    }).catch(error => errorCallback?.(error.message));
+
+    return await promise;
+  }
+
   async assignRoleToUser(userId: string, roles: string[], successCallback?: () => void, errorCallback?: (error: any) => void) {
     const observable = this.httpClientService.post({
       controller: "users",
@@ -69,5 +86,13 @@ export class UserService {
     promise.then(response => successCallback?.()).catch(error => errorCallback?.(error.message));
 
     return (await promise).roles;
+  }
+
+  get isAdmin(): boolean {
+    return this.user?.roles.includes("Admin Dashboard");
+  }
+
+  get currentUser(): UserDetail {
+    return this.user;
   }
 }
