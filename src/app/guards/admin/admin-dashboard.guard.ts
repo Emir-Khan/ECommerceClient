@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, CanActivateChild, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { ActivatedRouteSnapshot, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
 import { UserService } from 'src/app/services/common/models/user.service';
 import { CustomToastrService, ToastrMessageType, ToastrPosition } from 'src/app/services/ui/custom-toastr.service';
@@ -7,7 +7,7 @@ import { CustomToastrService, ToastrMessageType, ToastrPosition } from 'src/app/
 @Injectable({
   providedIn: 'root'
 })
-export class AdminDashboardGuard implements CanActivate, CanActivateChild {
+export class AdminDashboardGuard  {
   constructor(private userService: UserService, private router: Router, private toastrService: CustomToastrService) { }
 
   check = async (): Promise<boolean> => {
