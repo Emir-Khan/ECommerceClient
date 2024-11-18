@@ -79,10 +79,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "ETicaretClient:build:production"
+              "buildTarget": "ETicaretClient:build:production"
             },
             "development": {
-              "browserTarget": "ETicaretClient:build:development"
+              "buildTarget": "ETicaretClient:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -90,7 +90,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ETicaretClient:build"
+            "buildTarget": "ETicaretClient:build"
           }
         },
         "test": {
