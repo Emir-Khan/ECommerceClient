@@ -8,7 +8,6 @@ import { LoginUser } from 'src/app/contracts/login-user';
 import { AuthService } from 'src/app/services/common/auth.service';
 import { UserAuthService } from 'src/app/services/common/models/user-auth.service';
 import { UserService } from 'src/app/services/common/models/user.service';
-import { CustomToastrService } from 'src/app/services/ui/custom-toastr.service';
 
 @Component({
   selector: 'app-login',
@@ -18,9 +17,11 @@ import { CustomToastrService } from 'src/app/services/ui/custom-toastr.service';
 export class LoginComponent implements OnInit {
   form: FormGroup
   submitted: boolean
+  private defaultOperations = async () => { this.authService.identityCheck(); await this.userService.getMe(); this.spinner.hide(SpinnerType.RunningDots); this.navigateToReturnUrlOrMain(); }
+  
   constructor(private formBuilder: FormBuilder,
-    private toastrService: CustomToastrService,
     private userAuthService: UserAuthService,
+    private userService: UserService,
     private spinner: NgxSpinnerService,
     private authService: AuthService,
     private activatedRoute: ActivatedRoute,
@@ -30,11 +31,10 @@ export class LoginComponent implements OnInit {
       spinner.show(SpinnerType.RunningDots)
       switch (user.provider) {
         case "GOOGLE":
-          // i can add navigateToReturnUrlOrMain method to authService
-          await userAuthService.googleLogin(user, () => { authService.identityCheck(); this.navigateToReturnUrlOrMain(); spinner.hide(SpinnerType.RunningDots) })
+          await userAuthService.googleLogin(user, this.defaultOperations)
           break;
         case "FACEBOOK":
-          await userAuthService.facebookLogin(user, () => { authService.identityCheck(); this.navigateToReturnUrlOrMain(); spinner.hide(SpinnerType.RunningDots) })
+          await userAuthService.facebookLogin(user, this.defaultOperations)
           break;
       }
     });
@@ -68,16 +68,11 @@ export class LoginComponent implements OnInit {
       return;
     this.spinner.show(SpinnerType.RunningDots)
 
-    await this.userAuthService.login(user, () => {
-      this.authService.identityCheck()
-
-      this.navigateToReturnUrlOrMain()
-
-      this.spinner.hide(SpinnerType.RunningDots)
-    })
+    await this.userAuthService.login(user, this.defaultOperations)
   }
 
   async facebookLogin() {
-    this.socialAuthService.signIn(FacebookLoginProvider.PROVIDER_ID);
+    await this.socialAuthService.signIn(FacebookLoginProvider.PROVIDER_ID);
+    this.defaultOperations()
   }
 }

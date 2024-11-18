@@ -13,8 +13,8 @@ import { VerifyResetTokenResponse } from 'src/app/contracts/users/verify-reset-t
 export class UserAuthService {
 
   constructor(private httpClientService: HttpClientService, private toastrService: CustomToastrService) { }
-  
-  async login(user: LoginUser, callBackFunction?: () => void) {
+
+  async login(user: LoginUser, callBackFunction?: () => void | Promise<any>) {
     const observable: Observable<any | TokenResponse> = this.httpClientService.post<any | TokenResponse>({
       controller: "auth",
       action: "login"
@@ -30,10 +30,11 @@ export class UserAuthService {
         position: ToastrPosition.TopRight
       })
     }
-    callBackFunction()
+
+    await callBackFunction()
   }
 
-  async googleLogin(user: SocialUser, callBackFunction?: () => void) {
+  async googleLogin(user: SocialUser, callBackFunction?: () => void | Promise<any>) {
     const observable: Observable<SocialUser | TokenResponse> = this.httpClientService.post<SocialUser | TokenResponse>({
       action: "google-login",
       controller: "auth"
@@ -50,10 +51,10 @@ export class UserAuthService {
       })
     }
 
-    callBackFunction()
+    await callBackFunction()
   }
 
-  async facebookLogin(user: SocialUser, callBackFunction?: () => void) {
+  async facebookLogin(user: SocialUser, callBackFunction?: () => void | Promise<any>) {
     const observable: Observable<SocialUser | TokenResponse> = this.httpClientService.post<SocialUser | TokenResponse>({
       action: "facebook-login",
       controller: "auth"
@@ -67,10 +68,10 @@ export class UserAuthService {
       this.toastrService.message("Login Successful", "Success", { messageType: ToastrMessageType.Success, position: ToastrPosition.TopRight })
     }
 
-    callBackFunction()
+    await callBackFunction();
   }
 
-  async refreshTokenLogin(refreshToken: string, callBackFunction?: () => void): Promise<TokenResponse> {
+  async refreshTokenLogin(refreshToken: string, callBackFunction?: () => void | Promise<any>): Promise<TokenResponse> {
     const observable: Observable<any | TokenResponse> = this.httpClientService.post({
       controller: "auth",
       action: "refreshtokenlogin"
@@ -82,28 +83,28 @@ export class UserAuthService {
       localStorage.setItem("accessToken", tokenResponse.token.accessToken)
       localStorage.setItem("refreshToken", tokenResponse.token.refreshToken)
     }
-    callBackFunction();
+    await callBackFunction();
     return tokenResponse
   }
 
-  async passwordReset(email: string, callBackFunction?: () => void) {
+  async passwordReset(email: string, callBackFunction?: () => void | Promise<any>) {
     const observable: Observable<any> = this.httpClientService.post({
       controller: "auth",
       action: "password-reset"
     }, { email: email });
 
     await firstValueFrom(observable);
-    callBackFunction();
+    await callBackFunction();
   }
 
-  async verifyResetToken(resetToken: string, userId: string, callBackFunction?: (state:VerifyResetTokenResponse) => void): Promise<VerifyResetTokenResponse> {
+  async verifyResetToken(resetToken: string, userId: string, callBackFunction?: (state: VerifyResetTokenResponse) => void | Promise<any>): Promise<VerifyResetTokenResponse> {
     const observable: Observable<any> = this.httpClientService.post({
       controller: "auth",
       action: "verify-reset-token"
     }, { resetToken: resetToken, userId: userId })
 
     const response: VerifyResetTokenResponse = await firstValueFrom(observable);
-    callBackFunction(response);
+    await callBackFunction(response);
     return response;
   }
 }
