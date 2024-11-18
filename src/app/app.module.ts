@@ -31,7 +31,7 @@ import { HttpErrorHandlerInterceptorService } from './services/common/http-error
     JwtModule.forRoot({
       config: {
         tokenGetter: () => localStorage.getItem("accessToken"),
-        allowedDomains: ["ecommerceapiapi20230718135833.azurewebsites.net"]
+        allowedDomains: ["localhost:7131"]
       }
     }),
     ReactiveFormsModule
@@ -54,7 +54,7 @@ import { HttpErrorHandlerInterceptorService } from './services/common/http-error
         onError: err => console.log(err)
       } as SocialAuthServiceConfig
     },
-    { provide: "baseUrl", useValue: "https://ecommerceapiapi20230718135833.azurewebsites.net/api", multi: true },
+    { provide: "baseUrl", useValue: "https://localhost:7131/api", multi: true },
     { provide: "baseSignalRUrl", useValue: "https://ecommerceapiapi20230718135833.azurewebsites.net/", multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: HttpErrorHandlerInterceptorService, multi: true }
   ],
