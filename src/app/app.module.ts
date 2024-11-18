@@ -1,12 +1,12 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, REMOVE_STYLES_ON_COMPONENT_DESTROY } from '@angular/platform-browser';
 import { AdminModule } from './admin/admin.module';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations"
 import { UiModule } from './ui/ui.module';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ToastrModule } from 'ngx-toastr';
 import { JwtModule } from '@auth0/angular-jwt';
@@ -20,10 +20,13 @@ import { HttpErrorHandlerInterceptorService } from './services/common/http-error
     AppComponent,
     // LoginComponent
   ],
+  bootstrap: [AppComponent],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    HttpClientModule,
     AppRoutingModule,
     NgxSpinnerModule,
     ToastrModule.forRoot(),
@@ -31,10 +34,9 @@ import { HttpErrorHandlerInterceptorService } from './services/common/http-error
     JwtModule.forRoot({
       config: {
         tokenGetter: () => localStorage.getItem("accessToken"),
-        allowedDomains: ["ecommerceapiapi20230718135833.azurewebsites.net"]
+        allowedDomains: ["localhost:7131"]
       }
     }),
-    ReactiveFormsModule
   ],
   providers: [
     {
@@ -54,13 +56,11 @@ import { HttpErrorHandlerInterceptorService } from './services/common/http-error
         onError: err => console.log(err)
       } as SocialAuthServiceConfig
     },
-    { provide: "baseUrl", useValue: "https://ecommerceapiapi20230718135833.azurewebsites.net/api", multi: true },
+    { provide: "baseUrl", useValue: "https://localhost:7131/api", multi: true },
     { provide: "baseSignalRUrl", useValue: "https://ecommerceapiapi20230718135833.azurewebsites.net/", multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: HttpErrorHandlerInterceptorService, multi: true }
-  ],
-  bootstrap: [AppComponent],
-  schemas: [
-    CUSTOM_ELEMENTS_SCHEMA
+    { provide: HTTP_INTERCEPTORS, useClass: HttpErrorHandlerInterceptorService, multi: true },
+    { provide: REMOVE_STYLES_ON_COMPONENT_DESTROY, useValue: false },
+    provideHttpClient(withInterceptorsFromDi())
   ]
 })
 export class AppModule { }
