@@ -40,7 +40,6 @@ export class FileUploadComponent {
       } else {
         // It was a directory (empty directories are added, otherwise only files)
         const fileEntry = selectedFile.fileEntry as FileSystemDirectoryEntry;
-        console.log(selectedFile.relativePath, fileEntry);
       }
     }
     this.dialogService.openDialog({

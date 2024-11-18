@@ -14,7 +14,7 @@
           <a class="nav-link" aria-current="page" routerLink="products" routerLinkActive="active">Products</a>
         </li>
         <li class="nav-item" *ngIf="authService.isAuthenticated && userService.isAdmin">
-          <a class="nav-link" routerLink="/admin">Admin Pannel</a>
+          <a class="nav-link" href="/admin">Admin Pannel</a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
