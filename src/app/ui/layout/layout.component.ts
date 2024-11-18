@@ -1,31 +1,26 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
-import { UserDetail } from 'src/app/contracts/users/user-detail';
+import { Component, ViewChild } from '@angular/core';
+import { UserDetail } from 'src/app/models/user-detail';
 import { DynamicComponentLoaderDirective } from 'src/app/directives/common/dynamic-component-loader.directive';
 import { AuthService } from 'src/app/services/common/auth.service';
 import { DynamicComponent, DynamicComponentLoaderService } from 'src/app/services/common/dynamic-component-loader.service';
 import { UserService } from 'src/app/services/common/models/user.service';
-import { CustomToastrService } from 'src/app/services/ui/custom-toastr.service';
+import { select, Store } from '@ngrx/store';
+import { AppState } from 'src/app/states/user/app.state';
+import { Observable } from 'rxjs';
+import { selectUser } from 'src/app/states/user/app.selector';
 
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.scss']
 })
-export class LayoutComponent implements OnInit {
+export class LayoutComponent {
   @ViewChild(DynamicComponentLoaderDirective, { static: true })
   dynamicLoadComponentDirective: DynamicComponentLoaderDirective;
-  user: UserDetail | null = null;
+  user: Observable<UserDetail> | null = this.store.pipe(select(selectUser));
 
-  constructor(public userService: UserService, public authService: AuthService, private toastrService: CustomToastrService, private router: Router,
-    private dynamicComponentLoaderService: DynamicComponentLoaderService) {
-
-  }
-  async ngOnInit(): Promise<void> {
-    this.authService.identityCheck();
-    if (this.authService.isAuthenticated)
-      this.user = await this.userService.getMe();
-  }
+  constructor(private store: Store<AppState>, public userService: UserService, public authService: AuthService,
+    private dynamicComponentLoaderService: DynamicComponentLoaderService) { }
 
   async loadComponent() {
     await this.dynamicComponentLoaderService.loadComponent(DynamicComponent.BasketComponent, this.dynamicLoadComponentDirective.viewContainerRef);

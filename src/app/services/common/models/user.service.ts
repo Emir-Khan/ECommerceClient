@@ -1,17 +1,20 @@
 import { Injectable } from '@angular/core';
 import { firstValueFrom, Observable } from 'rxjs';
 import { CreateUser } from 'src/app/contracts/users/create-user';
-import { User } from 'src/app/entities/user';
+import { User } from 'src/app/models/user';
 import { HttpClientService } from '../http-client.service';
 import { ListUser } from 'src/app/contracts/users/list-users';
-import { UserDetail } from 'src/app/contracts/users/user-detail';
+import { UserDetail } from 'src/app/models/user-detail';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/states/user/app.state';
+import { setUser } from 'src/app/states/user/app.action';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
   private user: UserDetail;
-  constructor(private httpClientService: HttpClientService) { }
+  constructor(private store: Store<AppState>, private httpClientService: HttpClientService) { }
 
   async create(user: User): Promise<CreateUser> {
     const observable: Observable<CreateUser | User> = this.httpClientService.post<CreateUser | User>({
@@ -56,7 +59,7 @@ export class UserService {
 
     const promise = firstValueFrom(observable);
     promise.then((data) => {
-      this.user = data;
+      this.store.dispatch(setUser({ user: data }));
       successCallback?.()
     }).catch(error => errorCallback?.(error.message));
 

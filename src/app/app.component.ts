@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { SpinnerType } from './base/base.component';
+import { UserService } from './services/common/models/user.service';
+import { AuthService } from './services/common/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +13,7 @@ import { SpinnerType } from './base/base.component';
 export class AppComponent implements OnInit {
   currentRoute: string;
 
-  constructor(private spinner: NgxSpinnerService, private router: Router) {    
+  constructor(private spinner: NgxSpinnerService, private router: Router, public userService: UserService, public authService: AuthService) {
     this.currentRoute = "";
     this.router.events.subscribe((event: any) => {
       if (event instanceof NavigationStart) {
@@ -24,9 +26,11 @@ export class AppComponent implements OnInit {
       }
     })
   }
-  ngOnInit() {
-    /** spinner starts on init */
 
+  async ngOnInit() {
+    this.authService.identityCheck();
+    if (this.authService.isAuthenticated)
+      await this.userService.getMe();
   }
 
   title = 'ETicaretClient';

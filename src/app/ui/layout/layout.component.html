@@ -33,7 +33,7 @@
           <a class="nav-link disabled">Disabled</a>
         </li>
       </ul>
-      <div class="d-flex align-items-center" role="search">
+      <div class="d-flex align-items-center" *ngIf="user | async as userData">
         <div class="me-2" data-bs-toggle="modal" data-bs-target="#basketModal" (click)="loadComponent()">
           <a class="basket-icon text-dark">
             <i class="fa-solid fa-cart-shopping"></i>
@@ -43,9 +43,11 @@
         <div class="me-2">
           <a class="user-icon text-dark">
             <i class="fa-solid fa-user"></i>
-            {{user?.nameSurname}}
+            {{ userData.nameSurname | titlecase }}
           </a>
         </div>
+      </div>
+      <div class="d-flex align-items-center">
         <button class="btn btn-outline-success me-1" *ngIf="!authService.isAuthenticated" routerLink="login">Log
           In</button>
         <button class="btn btn-outline-primary" *ngIf="!authService.isAuthenticated" routerLink="register">Sign
@@ -53,6 +55,7 @@
         <button class="btn btn-outline-danger" (click)="authService.logOut()" *ngIf="authService.isAuthenticated">Log
           Out</button>
       </div>
+
     </div>
   </div>
 </nav>

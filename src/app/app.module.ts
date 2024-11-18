@@ -10,10 +10,11 @@ import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@a
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ToastrModule } from 'ngx-toastr';
 import { JwtModule } from '@auth0/angular-jwt';
-import { LoginComponent } from './ui/components/login/login.component';
-import { FacebookLoginProvider, GoogleLoginProvider, GoogleSigninButtonModule, SocialAuthServiceConfig, SocialLoginModule } from '@abacritt/angularx-social-login';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FacebookLoginProvider, GoogleLoginProvider, GoogleSigninButtonModule, SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
 import { HttpErrorHandlerInterceptorService } from './services/common/http-error-handler-interceptor.service';
+import { StoreModule, Store } from '@ngrx/store';
+import { userReducer } from './states/user/app.reducer';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,9 @@ import { HttpErrorHandlerInterceptorService } from './services/common/http-error
         allowedDomains: ["localhost:7131"]
       }
     }),
+    ReactiveFormsModule,
+    StoreModule.forRoot({ user: userReducer }),
+    GoogleSigninButtonModule
   ],
   providers: [
     {
