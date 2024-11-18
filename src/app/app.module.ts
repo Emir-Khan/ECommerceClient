@@ -1,5 +1,5 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, REMOVE_STYLES_ON_COMPONENT_DESTROY } from '@angular/platform-browser';
 import { AdminModule } from './admin/admin.module';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -56,7 +56,8 @@ import { HttpErrorHandlerInterceptorService } from './services/common/http-error
     },
     { provide: "baseUrl", useValue: "https://localhost:7131/api", multi: true },
     { provide: "baseSignalRUrl", useValue: "https://ecommerceapiapi20230718135833.azurewebsites.net/", multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: HttpErrorHandlerInterceptorService, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: HttpErrorHandlerInterceptorService, multi: true },
+    { provide: REMOVE_STYLES_ON_COMPONENT_DESTROY, useValue: false }
   ],
   bootstrap: [AppComponent],
   schemas: [
