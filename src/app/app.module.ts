@@ -6,7 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations"
 import { UiModule } from './ui/ui.module';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ToastrModule } from 'ngx-toastr';
 import { JwtModule } from '@auth0/angular-jwt';
@@ -20,10 +20,13 @@ import { HttpErrorHandlerInterceptorService } from './services/common/http-error
     AppComponent,
     // LoginComponent
   ],
+  bootstrap: [AppComponent],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    HttpClientModule,
     AppRoutingModule,
     NgxSpinnerModule,
     ToastrModule.forRoot(),
@@ -34,7 +37,6 @@ import { HttpErrorHandlerInterceptorService } from './services/common/http-error
         allowedDomains: ["localhost:7131"]
       }
     }),
-    ReactiveFormsModule
   ],
   providers: [
     {
@@ -57,11 +59,8 @@ import { HttpErrorHandlerInterceptorService } from './services/common/http-error
     { provide: "baseUrl", useValue: "https://localhost:7131/api", multi: true },
     { provide: "baseSignalRUrl", useValue: "https://ecommerceapiapi20230718135833.azurewebsites.net/", multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: HttpErrorHandlerInterceptorService, multi: true },
-    { provide: REMOVE_STYLES_ON_COMPONENT_DESTROY, useValue: false }
-  ],
-  bootstrap: [AppComponent],
-  schemas: [
-    CUSTOM_ELEMENTS_SCHEMA
+    { provide: REMOVE_STYLES_ON_COMPONENT_DESTROY, useValue: false },
+    provideHttpClient(withInterceptorsFromDi())
   ]
 })
 export class AppModule { }
