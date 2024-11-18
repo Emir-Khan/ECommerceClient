@@ -4,7 +4,18 @@
   margin-top: 6px;
 }
 
-.card img{
+.card img {
   height: 250px;
   object-fit: contain;
+}
+
+#product-list {
+  // ı want to make this reach the bottom of the page
+  min-height: 70vh;
+}
+
+@media (max-width: 767px) {
+  .row {
+    justify-content: center !important;
+  }
 }

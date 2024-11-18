@@ -1,15 +1,17 @@
-<div class="row justify-content-center">
-  <div class="card ms-2 me-4" style="width: 18rem;" *ngFor="let product of products">
-    <img src="{{product.imagePath}}" class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title">{{product.name}}</h5>
-      <p class="card-text">{{product.price | currency:"₺"}} | Stock: {{product.stock}}</p>
-      <button class="btn btn-primary" (click)="addToBasket(product)">Add to cart</button>
+<div id="product-list">
+  <div id="product-list-wrapper" class="row justify-content-start">
+    <div class="card ms-2 me-4" style="width: 18rem;" *ngFor="let product of products">
+      <img src="{{product.imagePath}}" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">{{product.name}}</h5>
+        <p class="card-text">{{product.price | currency:"₺"}} | Stock: {{product.stock}}</p>
+        <button class="btn btn-primary" (click)="addToBasket(product)">Add to cart</button>
+      </div>
     </div>
   </div>
 </div>
 
-<nav aria-label="Page navigation example" class="d-flex justify-content-center">
+<nav aria-label="Page navigation example" class="d-flex justify-content-center mt-3">
   <ul class="pagination">
     <li class="page-item">
       <a class="page-link" [routerLink]="['/products',currentPageNo - 1 <= 0 ? 1:currentPageNo - 1]"
@@ -17,8 +19,8 @@
         <span aria-hidden="true">&laquo;</span>
       </a>
     </li>
-    <li class="page-item" *ngFor="let pageNo of pageList"><a class="page-link" [ngClass]="{'active': currentPageNo == pageNo}"
-        [routerLink]="['/products',pageNo]">{{pageNo}}</a></li>
+    <li class="page-item" *ngFor="let pageNo of pageList"><a class="page-link"
+        [ngClass]="{'active': currentPageNo == pageNo}" [routerLink]="['/products',pageNo]">{{pageNo}}</a></li>
     <li class="page-item">
       <a class="page-link"
         [routerLink]="['/products',currentPageNo + 1 >= totalPageCount  ? totalPageCount:currentPageNo + 1]"

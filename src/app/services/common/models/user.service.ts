@@ -59,6 +59,7 @@ export class UserService {
 
     const promise = firstValueFrom(observable);
     promise.then((data) => {
+      this.user = data;
       this.store.dispatch(setUser({ user: data }));
       successCallback?.()
     }).catch(error => errorCallback?.(error.message));
@@ -93,9 +94,5 @@ export class UserService {
 
   get isAdmin(): boolean {
     return this.user?.roles.includes("Admin Dashboard");
-  }
-
-  get currentUser(): UserDetail {
-    return this.user;
   }
 }
