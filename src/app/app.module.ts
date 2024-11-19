@@ -61,7 +61,7 @@ import { ReactiveFormsModule } from '@angular/forms';
       } as SocialAuthServiceConfig
     },
     { provide: "baseUrl", useValue: "https://localhost:7131/api", multi: true },
-    { provide: "baseSignalRUrl", useValue: "https://ecommerceapiapi20230718135833.azurewebsites.net/", multi: true },
+    { provide: "baseSignalRUrl", useValue: "https://localhost:7131/", multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: HttpErrorHandlerInterceptorService, multi: true },
     { provide: REMOVE_STYLES_ON_COMPONENT_DESTROY, useValue: false },
     provideHttpClient(withInterceptorsFromDi())

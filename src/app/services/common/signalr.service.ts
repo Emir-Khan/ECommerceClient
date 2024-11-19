@@ -9,7 +9,7 @@ export class SignalRService {
   constructor(@Inject("baseSignalRUrl") private baseSignalRUrl: string) { }
 
 
-  private start(hubUrl: string) {
+  public start(hubUrl: string) {
     hubUrl = this.baseSignalRUrl + hubUrl;
 
     const builder: HubConnectionBuilder = new HubConnectionBuilder();

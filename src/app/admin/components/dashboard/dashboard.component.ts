@@ -13,8 +13,8 @@ declare var Chartist: any;
 export class DashboardComponent implements OnInit {
 
   constructor(private notificationService: NotificationService, private signalRService: SignalRService) {
-    // signalRService.start(HubUrls.ProductHub)
-    // signalRService.start(HubUrls.OrderHub)
+    signalRService.start(HubUrls.ProductHub)
+    signalRService.start(HubUrls.OrderHub)
   }
 
   startAnimationForLineChart(chart) {
