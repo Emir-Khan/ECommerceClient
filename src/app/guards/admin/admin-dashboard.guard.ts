@@ -18,7 +18,7 @@ export class AdminDashboardGuard  {
         messageType: ToastrMessageType.Warning,
         position: ToastrPosition.TopRight
       });
-      this.router.navigate(["/"]);
+      window.location.href = '/';
     }
     return isAdmin;
   }
@@ -28,9 +28,9 @@ export class AdminDashboardGuard  {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     return this.check();
   }
-  canActivateChild(
-    childRoute: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return this.check();
-  }
+  // canActivateChild(
+  //   childRoute: ActivatedRouteSnapshot,
+  //   state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+  //   return this.check();
+  // }
 }

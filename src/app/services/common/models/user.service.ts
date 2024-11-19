@@ -93,6 +93,6 @@ export class UserService {
   }
 
   get isAdmin(): boolean {
-    return this.user?.roles.includes("Admin Dashboard");
+    return this.user?.roles.includes("Admin Dashboard") || this.user?.roles.includes("Admin");
   }
 }

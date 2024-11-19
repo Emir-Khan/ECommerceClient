@@ -35,7 +35,7 @@ const routes: Routes = [
       { path: "authorize-menu", loadChildren: () => import("./admin/components/authorize-menu/authorize-menu.module").then(module => module.AuthorizeMenuModule) },
       { path: "roles", loadChildren: () => import("./admin/components/role/role.module").then(module => module.RoleModule) },
       { path: "users", loadChildren: () => import("./admin/components/users/users.module").then(module => module.UsersModule) },
-    ], canActivate: [AuthGuard, AdminDashboardGuard], canActivateChild: [AuthGuard, AdminDashboardGuard]
+    ], canActivate: [AuthGuard, AdminDashboardGuard]
   }
 ];
 
